@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>클린에어 | 청소 & 공기순환 전문업체</title>
+  <style>
+    :root {
+      --primary: #1a73e8;
+      --primary-dark: #1557b0;
+      --accent: #34a853;
+      --light-bg: #f8faff;
+      --text: #1e2a3a;
+      --text-sub: #5a6a7e;
+      --border: #e2e8f0;
+      --white: #ffffff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Malgun Gothic', '맑은 고딕', sans-serif; color: var(--text); background: var(--white); }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(255,255,255,0.97); backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%; height: 68px;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo .logo-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--primary), #4dabf7);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; color: white;
+    }
+    .nav-logo span { font-size: 20px; font-weight: 800; color: var(--primary); letter-spacing: -0.5px; }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--text); font-size: 14px; font-weight: 500; transition: color .2s; }
+    .nav-links a:hover { color: var(--primary); }
+    .nav-cta {
+      background: var(--primary); color: white; padding: 10px 22px;
+      border-radius: 24px; font-size: 14px; font-weight: 700;
+      text-decoration: none; transition: background .2s;
+    }
+    .nav-cta:hover { background: var(--primary-dark); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { width: 24px; height: 2px; background: var(--text); border-radius: 2px; transition: .3s; }
+
+    /* ─── HERO ─── */
+    #hero {
+      margin-top: 68px;
+      background: linear-gradient(135deg, #0d2b6b 0%, #1a73e8 60%, #56b1f7 100%);
+      color: white; padding: 100px 5% 90px; text-align: center; position: relative; overflow: hidden;
+    }
+    #hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-badge {
+      display: inline-block; background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.4); border-radius: 20px;
+      padding: 6px 18px; font-size: 13px; font-weight: 600; margin-bottom: 24px;
+    }
+    #hero h1 { font-size: clamp(28px, 5vw, 52px); font-weight: 900; line-height: 1.25; margin-bottom: 20px; letter-spacing: -1px; }
+    #hero h1 span { color: #a8d8ff; }
+    #hero p { font-size: 17px; opacity: .85; margin-bottom: 40px; max-width: 560px; margin-left: auto; margin-right: auto; line-height: 1.7; }
+    .hero-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-white {
+      background: white; color: var(--primary); padding: 14px 32px;
+      border-radius: 30px; font-size: 15px; font-weight: 800;
+      text-decoration: none; transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 4px 20px rgba(0,0,0,.18);
+    }
+    .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,.22); }
+    .btn-outline-white {
+      background: transparent; color: white; padding: 14px 32px;
+      border: 2px solid rgba(255,255,255,.7); border-radius: 30px; font-size: 15px; font-weight: 700;
+      text-decoration: none; transition: background .2s;
+    }
+    .btn-outline-white:hover { background: rgba(255,255,255,.12); }
+
+    .hero-stats {
+      display: flex; justify-content: center; gap: 50px; margin-top: 70px;
+      flex-wrap: wrap; position: relative;
+    }
+    .hero-stats::before {
+      content: ''; position: absolute; top: -30px; left: 50%; transform: translateX(-50%);
+      width: 80%; height: 1px; background: rgba(255,255,255,.2);
+    }
+    .stat { text-align: center; }
+    .stat .num { font-size: 36px; font-weight: 900; }
+    .stat .label { font-size: 13px; opacity: .75; margin-top: 4px; }
+
+    /* ─── SECTION BASE ─── */
+    section { padding: 80px 5%; }
+    .section-label {
+      display: inline-block; background: #e8f2ff; color: var(--primary);
+      font-size: 12px; font-weight: 700; padding: 5px 14px; border-radius: 12px;
+      margin-bottom: 14px; letter-spacing: .5px;
+    }
+    h2 { font-size: clamp(22px, 3.5vw, 36px); font-weight: 800; line-height: 1.3; margin-bottom: 10px; letter-spacing: -0.5px; }
+    .sub { color: var(--text-sub); font-size: 15px; line-height: 1.7; }
+
+    /* ─── SERVICES ─── */
+    #services { background: var(--light-bg); }
+    #services .inner { max-width: 1100px; margin: 0 auto; }
+    #services .header { text-align: center; margin-bottom: 50px; }
+    .service-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
+    .service-card {
+      background: white; border-radius: 16px; padding: 34px 28px;
+      box-shadow: 0 2px 16px rgba(26,115,232,.07);
+      transition: transform .25s, box-shadow .25s; cursor: default;
+      border: 1px solid var(--border);
+    }
+    .service-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(26,115,232,.13); }
+    .service-icon {
+      width: 56px; height: 56px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px; margin-bottom: 18px;
+    }
+    .service-card h3 { font-size: 18px; font-weight: 800; margin-bottom: 10px; }
+    .service-card p { font-size: 14px; color: var(--text-sub); line-height: 1.65; }
+    .service-card .tag {
+      display: inline-block; margin-top: 14px; font-size: 12px; font-weight: 600;
+      padding: 4px 12px; border-radius: 8px;
+    }
+
+    /* ─── WHY ─── */
+    #why { max-width: 1100px; margin: 0 auto; }
+    #why .header { margin-bottom: 50px; }
+    .why-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 28px; }
+    .why-item { display: flex; gap: 16px; align-items: flex-start; }
+    .why-num {
+      min-width: 48px; height: 48px; border-radius: 12px;
+      background: linear-gradient(135deg, var(--primary), #56b1f7);
+      color: white; font-size: 20px; font-weight: 900;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .why-item h4 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+    .why-item p { font-size: 13px; color: var(--text-sub); line-height: 1.6; }
+
+    /* ─── PROCESS ─── */
+    #process { background: linear-gradient(135deg, #0d2b6b, #1a73e8); color: white; }
+    #process .inner { max-width: 1000px; margin: 0 auto; text-align: center; }
+    #process .section-label { background: rgba(255,255,255,.18); color: white; }
+    #process h2 { color: white; }
+    #process .sub { opacity: .8; }
+    .process-steps { display: flex; gap: 0; margin-top: 50px; flex-wrap: wrap; justify-content: center; }
+    .step {
+      flex: 1; min-width: 140px; max-width: 180px;
+      display: flex; flex-direction: column; align-items: center;
+      padding: 24px 16px; position: relative;
+    }
+    .step:not(:last-child)::after {
+      content: '→'; position: absolute; right: -14px; top: 36px;
+      font-size: 22px; color: rgba(255,255,255,.4);
+    }
+    .step-circle {
+      width: 60px; height: 60px; border-radius: 50%;
+      border: 2px solid rgba(255,255,255,.5);
+      background: rgba(255,255,255,.12);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px; margin-bottom: 14px;
+    }
+    .step h4 { font-size: 14px; font-weight: 700; text-align: center; }
+    .step p { font-size: 12px; opacity: .7; text-align: center; margin-top: 6px; line-height: 1.5; }
+
+    /* ─── REVIEWS ─── */
+    #reviews { background: var(--light-bg); }
+    #reviews .inner { max-width: 1100px; margin: 0 auto; }
+    #reviews .header { text-align: center; margin-bottom: 50px; }
+    .review-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 22px; }
+    .review-card {
+      background: white; border-radius: 14px; padding: 26px 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.06); border: 1px solid var(--border);
+    }
+    .stars { color: #f59e0b; font-size: 14px; margin-bottom: 12px; }
+    .review-card p { font-size: 14px; color: var(--text-sub); line-height: 1.7; margin-bottom: 16px; }
+    .reviewer { display: flex; align-items: center; gap: 10px; }
+    .avatar {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), #56b1f7);
+      color: white; display: flex; align-items: center; justify-content: center;
+      font-size: 15px; font-weight: 700;
+    }
+    .reviewer-info .name { font-size: 14px; font-weight: 700; }
+    .reviewer-info .detail { font-size: 12px; color: var(--text-sub); }
+
+    /* ─── CTA BANNER ─── */
+    #cta {
+      background: linear-gradient(135deg, #0d2b6b, var(--primary));
+      color: white; text-align: center; padding: 80px 5%;
+    }
+    #cta h2 { color: white; font-size: clamp(22px,4vw,40px); margin-bottom: 16px; }
+    #cta p { opacity: .85; font-size: 16px; margin-bottom: 36px; }
+    .cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+    /* ─── CONTACT ─── */
+    #contact { max-width: 900px; margin: 0 auto; }
+    #contact .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: start; }
+    #contact h2 { margin-bottom: 10px; }
+    .contact-item { display: flex; align-items: center; gap: 14px; margin-top: 20px; }
+    .contact-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: #e8f2ff; color: var(--primary);
+      display: flex; align-items: center; justify-content: center; font-size: 18px;
+      flex-shrink: 0;
+    }
+    .contact-item h4 { font-size: 13px; color: var(--text-sub); margin-bottom: 2px; }
+    .contact-item p { font-size: 15px; font-weight: 600; }
+    .form-wrap { background: var(--light-bg); border-radius: 18px; padding: 32px; }
+    .form-wrap h3 { font-size: 18px; font-weight: 800; margin-bottom: 22px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: var(--text-sub); }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; padding: 12px 14px; border: 1.5px solid var(--border);
+      border-radius: 10px; font-size: 14px; font-family: inherit;
+      transition: border-color .2s; background: white; color: var(--text);
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      outline: none; border-color: var(--primary);
+    }
+    .form-group textarea { resize: vertical; min-height: 90px; }
+    .btn-submit {
+      width: 100%; padding: 14px; background: var(--primary); color: white;
+      border: none; border-radius: 10px; font-size: 15px; font-weight: 700;
+      cursor: pointer; transition: background .2s;
+    }
+    .btn-submit:hover { background: var(--primary-dark); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: #0d1b2e; color: rgba(255,255,255,.6);
+      padding: 50px 5% 30px;
+    }
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
+    .footer-top { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 32px; margin-bottom: 40px; }
+    .footer-brand .logo { font-size: 22px; font-weight: 900; color: white; margin-bottom: 10px; }
+    .footer-brand p { font-size: 13px; line-height: 1.7; max-width: 260px; }
+    .footer-links h4 { color: white; font-size: 14px; font-weight: 700; margin-bottom: 14px; }
+    .footer-links ul { list-style: none; }
+    .footer-links li { margin-bottom: 8px; }
+    .footer-links a { color: rgba(255,255,255,.55); text-decoration: none; font-size: 13px; transition: color .2s; }
+    .footer-links a:hover { color: white; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,.1); padding-top: 24px; font-size: 12px; }
+
+    /* ─── FLOATING ─── */
+    .float-btns {
+      position: fixed; bottom: 28px; right: 22px; z-index: 999;
+      display: flex; flex-direction: column; gap: 10px; align-items: flex-end;
+    }
+    .float-btn {
+      display: flex; align-items: center; gap: 8px;
+      padding: 12px 18px; border-radius: 28px; text-decoration: none;
+      font-size: 13px; font-weight: 700; box-shadow: 0 4px 18px rgba(0,0,0,.2);
+      transition: transform .2s;
+    }
+    .float-btn:hover { transform: scale(1.05); }
+    .float-kakao { background: #fee500; color: #3c1e1e; }
+    .float-call { background: var(--primary); color: white; }
+
+    /* ─── MOBILE ─── */
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      #contact .grid { grid-template-columns: 1fr; }
+      .step:not(:last-child)::after { display: none; }
+      .process-steps { flex-direction: column; align-items: center; }
+      .hero-stats { gap: 28px; }
+    }
+
+    /* success toast */
+    #toast {
+      position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%) translateY(30px);
+      background: var(--accent); color: white; padding: 12px 28px; border-radius: 28px;
+      font-size: 14px; font-weight: 700; opacity: 0; pointer-events: none;
+      transition: opacity .3s, transform .3s; z-index: 9999;
+    }
+    #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="logo-icon">💨</div>
+    <span>클린에어</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">서비스</a></li>
+    <li><a href="#why">왜 클린에어</a></li>
+    <li><a href="#process">진행절차</a></li>
+    <li><a href="#reviews">후기</a></li>
+    <li><a href="#contact">견적문의</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">무료 견적 받기</a>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-badge">✨ 전문 청소 · 공기순환 토탈 솔루션</div>
+  <h1>깨끗한 공간, <span>맑은 공기</span><br>클린에어가 책임집니다</h1>
+  <p>전문 청소 서비스와 공기순환기 설치·관리까지<br>하나의 업체에서 원스톱으로 해결하세요.</p>
+  <div class="hero-btns">
+    <a href="#contact" class="btn-white">📋 무료 견적 받기</a>
+    <a href="tel:010-0000-0000" class="btn-outline-white">📞 전화 상담</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="num">5,200+</div><div class="label">누적 시공 건수</div></div>
+    <div class="stat"><div class="num">9.8</div><div class="label">고객 만족 점수</div></div>
+    <div class="stat"><div class="num">8년+</div><div class="label">업계 경력</div></div>
+    <div class="stat"><div class="num">100%</div><div class="label">직영팀 투입</div></div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="inner">
+    <div class="header">
+      <div class="section-label">OUR SERVICES</div>
+      <h2>클린에어 대표 서비스</h2>
+      <p class="sub" style="margin-top:8px;">청소부터 공기순환까지, 쾌적한 생활환경을 만들어 드립니다.</p>
+    </div>
+    <div class="service-grid">
+      <div class="service-card">
+        <div class="service-icon" style="background:#e8f2ff;">🏠</div>
+        <h3>입주 청소</h3>
+        <p>새 집 입주 전, 건축 먼지와 유해물질을 완벽 제거합니다. 신축·구축 모두 가능하며 살균 소독까지 포함됩니다.</p>
+        <span class="tag" style="background:#e8f2ff;color:var(--primary);">홈 클리닝</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon" style="background:#e6f9f0;">🚚</div>
+        <h3>이사 청소</h3>
+        <p>이사 후 남겨진 묵은 때, 세균, 곰팡이를 깨끗이 제거합니다. 전후 사진으로 결과를 투명하게 공유합니다.</p>
+        <span class="tag" style="background:#e6f9f0;color:var(--accent);">홈 클리닝</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon" style="background:#fff8e6;">🏢</div>
+        <h3>사무실·상가 청소</h3>
+        <p>쾌적한 업무 환경을 위한 정기 청소 서비스. 고압 스팀 장비로 보이지 않는 곳까지 위생적으로 관리합니다.</p>
+        <span class="tag" style="background:#fff8e6;color:#b45309;">사업장 클리닝</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon" style="background:#fce8ff;">🔧</div>
+        <h3>공기순환기 설치</h3>
+        <p>전열교환기 및 공기순환기를 전문적으로 설치합니다. 실내 이산화탄소 농도를 낮추고 쾌적한 공기질을 유지합니다.</p>
+        <span class="tag" style="background:#fce8ff;color:#7c3aed;">공기순환</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon" style="background:#e8f6ff;">🌀</div>
+        <h3>공기순환기 청소·관리</h3>
+        <p>필터 교체, 내부 청소, 성능 점검까지. 정기 관리 계약으로 항상 최적의 상태를 유지합니다.</p>
+        <span class="tag" style="background:#e8f6ff;color:#0369a1;">공기순환</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon" style="background:#fff0f0;">🧪</div>
+        <h3>새집증후군 케어</h3>
+        <p>포름알데히드·VOC 등 유해물질을 측정하고 제거합니다. 아이가 있는 가정에 특히 추천드립니다.</p>
+        <span class="tag" style="background:#fff0f0;color:#dc2626;">부가 서비스</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section id="why">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="header" style="margin-bottom:50px;">
+      <div class="section-label">WHY CLEAN AIR</div>
+      <h2>왜 클린에어여야 할까요?</h2>
+      <p class="sub" style="margin-top:8px;">수천 건의 현장 경험이 만든 클린에어만의 차별점입니다.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-item">
+        <div class="why-num">01</div>
+        <div>
+          <h4>100% 직영팀 투입</h4>
+          <p>외주 없이 교육받은 자체 팀이 직접 방문합니다. 언제나 균일한 품질을 보장합니다.</p>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-num">02</div>
+        <div>
+          <h4>친환경 세제 사용</h4>
+          <p>인체와 환경에 안전한 친환경 원료 세제만 사용합니다. 어린이·반려동물도 걱정 없습니다.</p>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-num">03</div>
+        <div>
+          <h4>5일 무상 A/S 보장</h4>
+          <p>서비스 완료 후 5일 이내 미흡한 부분은 무상으로 재진행합니다.</p>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-num">04</div>
+        <div>
+          <h4>청소 + 공기순환 원스톱</h4>
+          <p>청소와 공기순환기 설치·관리를 한 업체에서. 시간과 비용을 모두 절약합니다.</p>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-num">05</div>
+        <div>
+          <h4>배상책임보험 가입</h4>
+          <p>작업 중 발생할 수 있는 사고에 대비하여 배상책임보험에 가입되어 있습니다.</p>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-num">06</div>
+        <div>
+          <h4>전후 사진 제공</h4>
+          <p>작업 전·후 사진을 고객님께 공유합니다. 투명한 서비스로 신뢰를 드립니다.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="inner">
+    <div class="section-label">SERVICE PROCESS</div>
+    <h2>서비스 진행 절차</h2>
+    <p class="sub" style="margin-top:10px;">간단한 5단계로 깨끗한 공간을 만들어 드립니다.</p>
+    <div class="process-steps">
+      <div class="step">
+        <div class="step-circle">📞</div>
+        <h4>상담 신청</h4>
+        <p>전화·카카오·온라인 견적 접수</p>
+      </div>
+      <div class="step">
+        <div class="step-circle">📋</div>
+        <h4>현장 확인</h4>
+        <p>공간 규모·상태 파악 및 견적 안내</p>
+      </div>
+      <div class="step">
+        <div class="step-circle">📅</div>
+        <h4>일정 확정</h4>
+        <p>고객 맞춤 일정 조율 후 확정</p>
+      </div>
+      <div class="step">
+        <div class="step-circle">✅</div>
+        <h4>작업 진행</h4>
+        <p>전담팀 직접 방문·작업·검수</p>
+      </div>
+      <div class="step">
+        <div class="step-circle">🏆</div>
+        <h4>완료 보고</h4>
+        <p>전후 사진 공유 및 A/S 안내</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="inner">
+    <div class="header">
+      <div class="section-label">CUSTOMER REVIEW</div>
+      <h2>실제 고객 후기</h2>
+      <p class="sub" style="margin-top:8px;">100% 실제 이용 고객님의 생생한 후기입니다.</p>
+    </div>
+    <div class="review-grid">
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p>입주 청소와 공기순환기 설치를 함께 맡겼는데, 한 번에 다 해결되니 너무 편했습니다. 새집인데도 먼지가 엄청 나왔고 깨끗하게 정리해 주셨어요. 강추합니다!</p>
+        <div class="reviewer">
+          <div class="avatar">김</div>
+          <div class="reviewer-info">
+            <div class="name">김○○ 고객님</div>
+            <div class="detail">서울 강남구 · 아파트 34평</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p>이사 청소 후 공기가 달라진 게 느껴졌습니다. 특히 환기 시스템 청소까지 같이 해주셔서 아이 있는 집으로 딱 맞는 서비스였어요. 꼼꼼하게 해주셔서 감사합니다.</p>
+        <div class="reviewer">
+          <div class="avatar">이</div>
+          <div class="reviewer-info">
+            <div class="name">이○○ 고객님</div>
+            <div class="detail">경기 수원시 · 아파트 28평</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p>사무실 정기 청소 계약을 했는데, 매번 같은 수준으로 깔끔하게 해주십니다. 직원들도 만족하고 고객 미팅 때도 깔끔한 사무실로 좋은 인상을 줄 수 있습니다.</p>
+        <div class="reviewer">
+          <div class="avatar">박</div>
+          <div class="reviewer-info">
+            <div class="name">박○○ 대표님</div>
+            <div class="detail">서울 마포구 · 사무실 50평</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p>새집증후군 케어 서비스를 받았는데, 측정 수치를 보여주면서 진행해 주셔서 신뢰가 갔습니다. 어린 아이가 있어서 걱정이 많았는데 안심이 됩니다.</p>
+        <div class="reviewer">
+          <div class="avatar">최</div>
+          <div class="reviewer-info">
+            <div class="name">최○○ 고객님</div>
+            <div class="detail">인천 연수구 · 신축 아파트</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p>공기순환기 설치 후 정말 차이가 느껴집니다. 환기를 안 해도 이산화탄소 수치가 낮게 유지되고 숙면을 취할 수 있게 됐어요. 설치 기사님도 친절하셨습니다.</p>
+        <div class="reviewer">
+          <div class="avatar">정</div>
+          <div class="reviewer-info">
+            <div class="name">정○○ 고객님</div>
+            <div class="detail">경기 성남시 · 오피스텔</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p>A/S 대응이 정말 빨랐습니다. 청소 후 놓친 부분을 연락드렸더니 다음 날 바로 와서 처리해 주셨어요. 이런 사후 관리가 재이용하게 만드는 것 같습니다.</p>
+        <div class="reviewer">
+          <div class="avatar">한</div>
+          <div class="reviewer-info">
+            <div class="name">한○○ 고객님</div>
+            <div class="detail">서울 송파구 · 아파트 25평</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <h2>지금 바로 무료 견적을 받아보세요</h2>
+  <p>24시간 이내 담당자가 연락드립니다. 부담 없이 문의하세요!</p>
+  <div class="cta-btns">
+    <a href="#contact" class="btn-white">📋 온라인 견적 신청</a>
+    <a href="tel:010-0000-0000" class="btn-outline-white">📞 010-0000-0000</a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div style="max-width:900px;margin:0 auto;">
+    <div class="grid">
+      <div>
+        <div class="section-label">CONTACT</div>
+        <h2>견적 문의 및<br>서비스 신청</h2>
+        <p class="sub" style="margin-top:10px;">아래 양식을 작성해 주시면<br>24시간 이내 담당자가 연락드립니다.</p>
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div>
+            <h4>전화 상담</h4>
+            <p>010-0000-0000</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">💬</div>
+          <div>
+            <h4>카카오톡 채널</h4>
+            <p>@클린에어 채널 검색</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🕐</div>
+          <div>
+            <h4>운영 시간</h4>
+            <p>평일 09:00 ~ 18:00</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <h4>주소</h4>
+            <p>서울특별시 ○○구 ○○로 000</p>
+          </div>
+        </div>
+      </div>
+      <div class="form-wrap">
+        <h3>📋 빠른 견적 신청</h3>
+        <div class="form-group">
+          <label>이름</label>
+          <input type="text" id="f-name" placeholder="홍길동" />
+        </div>
+        <div class="form-group">
+          <label>연락처</label>
+          <input type="tel" id="f-tel" placeholder="010-0000-0000" />
+        </div>
+        <div class="form-group">
+          <label>서비스 종류</label>
+          <select id="f-service">
+            <option value="">선택하세요</option>
+            <option>입주 청소</option>
+            <option>이사 청소</option>
+            <option>거주 청소</option>
+            <option>사무실·상가 청소</option>
+            <option>공기순환기 설치</option>
+            <option>공기순환기 청소·관리</option>
+            <option>새집증후군 케어</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>공간 평수</label>
+          <select id="f-size">
+            <option value="">선택하세요</option>
+            <option>20평 미만</option>
+            <option>20~30평</option>
+            <option>30~40평</option>
+            <option>40~50평</option>
+            <option>50평 이상</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>요청사항 (선택)</label>
+          <textarea id="f-msg" placeholder="추가로 알려주실 내용이 있으면 입력해주세요."></textarea>
+        </div>
+        <button class="btn-submit" onclick="submitForm()">견적 신청하기 →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo">💨 클린에어</div>
+        <p>전문 청소 서비스와 공기순환기 설치·관리를 원스톱으로 제공하는 전문 업체입니다.</p>
+      </div>
+      <div class="footer-links">
+        <h4>서비스</h4>
+        <ul>
+          <li><a href="#services">입주 청소</a></li>
+          <li><a href="#services">이사 청소</a></li>
+          <li><a href="#services">공기순환기 설치</a></li>
+          <li><a href="#services">사무실 청소</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>회사 정보</h4>
+        <ul>
+          <li><a href="#why">왜 클린에어</a></li>
+          <li><a href="#process">진행 절차</a></li>
+          <li><a href="#reviews">고객 후기</a></li>
+          <li><a href="#contact">견적 문의</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>고객 센터</h4>
+        <ul>
+          <li><a href="tel:010-0000-0000">📞 010-0000-0000</a></li>
+          <li><a href="#">💬 카카오톡 상담</a></li>
+          <li><a href="#">📝 개인정보처리방침</a></li>
+          <li><a href="#">📄 이용약관</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>상호: 클린에어 | 사업자번호: 000-00-00000 | 대표: 홍길동 | 주소: 서울특별시 ○○구 ○○로 000</p>
+      <p style="margin-top:6px;">© 2026 클린에어. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- FLOATING BUTTONS -->
+<div class="float-btns">
+  <a href="#" class="float-btn float-kakao">💬 카카오 상담</a>
+  <a href="tel:010-0000-0000" class="float-btn float-call">📞 전화 상담</a>
+</div>
+
+<!-- TOAST -->
+<div id="toast">✅ 견적 신청이 완료되었습니다! 24시간 이내 연락드립니다.</div>
+
+<script>
+  function submitForm() {
+    const name = document.getElementById('f-name').value.trim();
+    const tel = document.getElementById('f-tel').value.trim();
+    const svc = document.getElementById('f-service').value;
+    if (!name || !tel || !svc) {
+      alert('이름, 연락처, 서비스 종류는 필수입니다.');
+      return;
+    }
+    const toast = document.getElementById('toast');
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 3500);
+    document.getElementById('f-name').value = '';
+    document.getElementById('f-tel').value = '';
+    document.getElementById('f-service').value = '';
+    document.getElementById('f-size').value = '';
+    document.getElementById('f-msg').value = '';
+  }
+
+  function toggleMenu() {
+    // simple mobile menu toggle placeholder
+    const links = document.querySelector('.nav-links');
+    const cta = document.querySelector('.nav-cta');
+    if (links.style.display === 'flex') {
+      links.style.display = '';
+      cta.style.display = '';
+    } else {
+      links.style.display = 'flex';
+      links.style.flexDirection = 'column';
+      links.style.position = 'absolute';
+      links.style.top = '68px';
+      links.style.left = '0';
+      links.style.right = '0';
+      links.style.background = 'white';
+      links.style.padding = '20px 5%';
+      links.style.borderBottom = '1px solid #e2e8f0';
+      cta.style.display = 'none';
+    }
+  }
+</script>
+</body>
+</html>
