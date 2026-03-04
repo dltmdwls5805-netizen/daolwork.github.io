@@ -3,281 +3,147 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>다올웍스 | 프리미엄 청소 · 공기순환기 관리</title>
-  <meta name="description" content="입주청소, 이사청소, 상가청소, 공기순환기 필터 교체까지. 다올웍스 원스톱 클린케어 서비스를 소개합니다." />
+  <title>다올웍스 | 공기순환기 · 종합청소 · 에어컨청소</title>
+  <meta name="description" content="다올웍스 회사소개, 공기순환기/종합청소/에어컨청소 서비스 및 시공사례 게시판" />
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
-  <div class="topNotice">첫 이용 고객 대상 <strong>현장 점검 + 견적 무료</strong> 이벤트 진행 중</div>
-
-  <header class="header" id="header">
+  <header class="header">
     <div class="container header__inner">
-      <a class="brand" href="#">
-        <span class="brand__logo">DAOL</span>
-        <span class="brand__text">다올웍스</span>
-      </a>
+      <a class="brand" href="#">다올웍스</a>
 
-      <nav class="nav" id="nav">
-        <a href="#services">서비스</a>
-        <a href="#pricing">가격안내</a>
-        <a href="#process">진행절차</a>
-        <a href="#reviews">고객후기</a>
-        <a href="#faq">자주묻는질문</a>
+      <nav class="gnb" id="gnb">
+        <a href="#about">회사소개</a>
+
+        <div class="menuGroup">
+          <button type="button" class="menuToggle">공기순환기</button>
+          <div class="submenu">
+            <a href="#air-filter">공기순환기 필터</a>
+            <a href="#board-air">공기순환기 시공사례</a>
+          </div>
+        </div>
+
+        <div class="menuGroup">
+          <button type="button" class="menuToggle">종합청소</button>
+          <div class="submenu">
+            <a href="#cleaning-movein">입주청소</a>
+            <a href="#cleaning-moveout">이사청소</a>
+            <a href="#cleaning-disinfection">방역</a>
+            <a href="#cleaning-trash">쓰레기집청소</a>
+            <a href="#cleaning-factory">공장청소</a>
+            <a href="#board-cleaning">종합청소 시공사례</a>
+          </div>
+        </div>
+
+        <div class="menuGroup">
+          <button type="button" class="menuToggle">에어컨청소</button>
+          <div class="submenu">
+            <a href="#aircon">에어컨청소 안내</a>
+            <a href="#board-aircon">에어컨청소 시공사례</a>
+          </div>
+        </div>
       </nav>
 
-      <div class="header__actions">
-        <a class="tel" href="tel:01000000000">010-0000-0000</a>
-        <a class="btn btn--small" href="#estimate">무료견적</a>
-      </div>
-
-      <button class="hamburger" id="hamburger" aria-label="메뉴 열기">
-        <span></span><span></span><span></span>
-      </button>
+      <button class="hamburger" id="hamburger" aria-label="메뉴 열기">☰</button>
     </div>
   </header>
 
   <main>
     <section class="hero">
-      <div class="container hero__grid">
-        <div class="hero__copy">
-          <p class="kicker">청소 · 공기순환기 케어 전문 브랜드</p>
-          <h1>믿고 맡기는<br>프리미엄 클린 서비스</h1>
-          <p class="hero__desc">
-            입주/이사/거주/상가 청소부터 공기순환기 필터 교체 및 점검까지,
-            현장 맞춤형 체크리스트로 깔끔하게 마무리합니다.
-          </p>
+      <div class="container hero__inner">
+        <h1>생활/사업장 청소부터 공기순환기·에어컨까지</h1>
+        <p>현장 맞춤 시공과 시공사례 공유를 통해 신뢰를 만드는 다올웍스입니다.</p>
+        <a class="btn" href="#boards">시공사례 보러가기</a>
+      </div>
+    </section>
 
-          <div class="hero__cta">
-            <a class="btn" href="#estimate">무료 견적 받기</a>
-            <a class="btn btn--ghost" href="tel:01000000000">전화 상담</a>
-          </div>
+    <section id="about" class="section">
+      <div class="container">
+        <h2>회사소개</h2>
+        <p class="muted">다올웍스는 공기순환기 관리, 종합청소, 에어컨청소를 한 번에 제공하는 현장 전문 팀입니다.</p>
+      </div>
+    </section>
 
-          <div class="hero__stats">
-            <div><strong>4.9/5.0</strong><span>고객 만족도</span></div>
-            <div><strong>5,000+</strong><span>누적 작업</span></div>
-            <div><strong>24h</strong><span>빠른 상담 응답</span></div>
-          </div>
+    <section id="air-filter" class="section section--soft">
+      <div class="container">
+        <h2>공기순환기 필터</h2>
+        <p class="muted">필터 규격 확인, 교체, 점검 리포트까지 진행합니다.</p>
+      </div>
+    </section>
+
+    <section id="cleaning-movein" class="section">
+      <div class="container"><h2>입주청소</h2><p class="muted">준공 먼지/오염 제거 중심의 신규 입주 전 청소.</p></div>
+    </section>
+
+    <section id="cleaning-moveout" class="section section--soft">
+      <div class="container"><h2>이사청소</h2><p class="muted">생활 오염 제거와 공간 컨디션 회복에 집중합니다.</p></div>
+    </section>
+
+    <section id="cleaning-disinfection" class="section">
+      <div class="container"><h2>방역</h2><p class="muted">사업장/주거공간 대상 방역 작업과 점검 기록 제공.</p></div>
+    </section>
+
+    <section id="cleaning-trash" class="section section--soft">
+      <div class="container"><h2>쓰레기집청소</h2><p class="muted">분리수거/폐기/살균까지 단계별로 수행합니다.</p></div>
+    </section>
+
+    <section id="cleaning-factory" class="section">
+      <div class="container"><h2>공장청소</h2><p class="muted">현장 동선과 안전기준을 반영해 맞춤 청소를 진행합니다.</p></div>
+    </section>
+
+    <section id="aircon" class="section section--soft">
+      <div class="container"><h2>에어컨청소</h2><p class="muted">분해 세척, 냄새/곰팡이 개선, 작동 상태 점검.</p></div>
+    </section>
+
+    <section id="boards" class="section">
+      <div class="container">
+        <h2>시공사례 게시판</h2>
+        <p class="muted">각 카테고리별로 글 작성과 사진 등록이 가능합니다(브라우저 로컬 저장).</p>
+
+        <div class="boardTabs">
+          <button class="tab is-active" data-board="air">공기순환기 시공사례</button>
+          <button class="tab" data-board="cleaning">종합청소 시공사례</button>
+          <button class="tab" data-board="aircon">에어컨청소 시공사례</button>
         </div>
 
-        <aside class="heroCard">
-          <h2>빠른 무료 견적</h2>
-          <p>필수 정보만 입력하면 빠르게 연락드립니다.</p>
-          <form class="form" id="quickForm">
-            <label>서비스</label>
-            <select name="service" required>
-              <option value="" selected disabled>선택하세요</option>
-              <option>입주청소</option>
-              <option>이사청소</option>
-              <option>거주청소</option>
-              <option>상가/사무실 청소</option>
-              <option>공기순환기 필터 교체</option>
-              <option>공기순환기 점검/세척</option>
-            </select>
-
-            <label>지역</label>
-            <input name="area" placeholder="예) 울산 남구" required />
-
-            <label>연락처</label>
-            <input name="phone" placeholder="010-0000-0000" required />
-
-            <button class="btn btn--block" type="submit">상담 요청하기</button>
-            <small>* 제출 시 메일앱으로 연결됩니다.</small>
+        <div class="boardPanel is-active" id="board-air">
+          <h3>공기순환기 시공사례</h3>
+          <form class="postForm" data-board="air">
+            <input name="title" placeholder="제목" required />
+            <textarea name="content" rows="4" placeholder="시공 내용" required></textarea>
+            <input type="file" name="image" accept="image/*" />
+            <button class="btn" type="submit">글 등록</button>
           </form>
-        </aside>
-      </div>
-    </section>
-
-    <section class="trust">
-      <div class="container trust__grid">
-        <div class="trustItem"><strong>직영팀 운영</strong><span>외주 없이 표준 품질 유지</span></div>
-        <div class="trustItem"><strong>전후 사진 공유</strong><span>작업 결과 투명 공개</span></div>
-        <div class="trustItem"><strong>A/S 케어</strong><span>정책 범위 내 재점검</span></div>
-        <div class="trustItem"><strong>정기 관리</strong><span>필터/청소 주기 알림</span></div>
-      </div>
-    </section>
-
-    <section class="section" id="services">
-      <div class="container">
-        <div class="section__head">
-          <p class="section__kicker">OUR SERVICE</p>
-          <h2>현장에 맞춘 대표 서비스</h2>
+          <div class="postList" data-list="air"></div>
         </div>
 
-        <div class="cardGrid">
-          <article class="svcCard">
-            <h3>입주청소</h3>
-            <p>준공 먼지, 유해물질, 생활 전 오염 제거 중심 클리닝</p>
-            <a href="#estimate">견적 문의 →</a>
-          </article>
-          <article class="svcCard">
-            <h3>이사청소</h3>
-            <p>묵은 때와 틈새 오염을 집중 케어해 쾌적한 입주 환경 조성</p>
-            <a href="#estimate">견적 문의 →</a>
-          </article>
-          <article class="svcCard">
-            <h3>거주청소</h3>
-            <p>주방/욕실/창틀 등 생활 오염 구역 맞춤형 관리</p>
-            <a href="#estimate">견적 문의 →</a>
-          </article>
-          <article class="svcCard">
-            <h3>사무실·상가 청소</h3>
-            <p>업종별 운영시간과 동선을 고려한 정기/단기 청소</p>
-            <a href="#estimate">견적 문의 →</a>
-          </article>
-          <article class="svcCard">
-            <h3>공기순환기 필터 교체</h3>
-            <p>규격 확인, 교체, 이력관리까지 원스톱 대응</p>
-            <a href="#estimate">견적 문의 →</a>
-          </article>
-          <article class="svcCard">
-            <h3>공기순환기 점검/세척</h3>
-            <p>내부 오염 점검 및 성능 저하 요소 사전 관리</p>
-            <a href="#estimate">견적 문의 →</a>
-          </article>
+        <div class="boardPanel" id="board-cleaning">
+          <h3>종합청소 시공사례</h3>
+          <form class="postForm" data-board="cleaning">
+            <input name="title" placeholder="제목" required />
+            <textarea name="content" rows="4" placeholder="시공 내용" required></textarea>
+            <input type="file" name="image" accept="image/*" />
+            <button class="btn" type="submit">글 등록</button>
+          </form>
+          <div class="postList" data-list="cleaning"></div>
         </div>
-      </div>
-    </section>
 
-    <section class="section section--soft" id="pricing">
-      <div class="container">
-        <div class="section__head">
-          <p class="section__kicker">PRICE GUIDE</p>
-          <h2>가격 안내(예시)</h2>
+        <div class="boardPanel" id="board-aircon">
+          <h3>에어컨청소 시공사례</h3>
+          <form class="postForm" data-board="aircon">
+            <input name="title" placeholder="제목" required />
+            <textarea name="content" rows="4" placeholder="시공 내용" required></textarea>
+            <input type="file" name="image" accept="image/*" />
+            <button class="btn" type="submit">글 등록</button>
+          </form>
+          <div class="postList" data-list="aircon"></div>
         </div>
-        <div class="priceGrid">
-          <article class="priceCard">
-            <h3>입주/이사 청소</h3>
-            <p class="price">평당 12,000원~</p>
-            <ul>
-              <li>현장 상태에 따라 변동</li>
-              <li>욕실/주방/창틀 기본 포함</li>
-              <li>사전 현장 체크 후 확정</li>
-            </ul>
-          </article>
-          <article class="priceCard">
-            <h3>거주/부분 청소</h3>
-            <p class="price">공간별 별도 견적</p>
-            <ul>
-              <li>오염도/작업 범위 기준</li>
-              <li>부분 집중 청소 가능</li>
-              <li>당일 대응 가능(일정 협의)</li>
-            </ul>
-          </article>
-          <article class="priceCard">
-            <h3>공기순환기 관리</h3>
-            <p class="price">모델별 맞춤 견적</p>
-            <ul>
-              <li>필터 규격 확인 후 진행</li>
-              <li>교체+점검 패키지 가능</li>
-              <li>기관/사업장 정기 관리</li>
-            </ul>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="process">
-      <div class="container">
-        <div class="section__head">
-          <p class="section__kicker">PROCESS</p>
-          <h2>상담부터 완료까지 5단계</h2>
-        </div>
-        <div class="processGrid">
-          <div class="step"><span>01</span><strong>문의 접수</strong><p>전화/온라인으로 요청사항 확인</p></div>
-          <div class="step"><span>02</span><strong>현장 파악</strong><p>면적/오염도/장비 상태 점검</p></div>
-          <div class="step"><span>03</span><strong>견적 안내</strong><p>범위별 비용과 일정 안내</p></div>
-          <div class="step"><span>04</span><strong>작업 진행</strong><p>체크리스트 기반 청소/관리</p></div>
-          <div class="step"><span>05</span><strong>검수/완료</strong><p>전후 공유 및 A/S 정책 안내</p></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section section--soft" id="reviews">
-      <div class="container">
-        <div class="section__head">
-          <p class="section__kicker">REVIEW</p>
-          <h2>고객 후기</h2>
-        </div>
-        <div class="reviewGrid">
-          <article class="review"><strong>★★★★★</strong><p>시간 약속 정확하고 마감이 정말 깔끔했어요.</p><span>울산 · 입주청소</span></article>
-          <article class="review"><strong>★★★★★</strong><p>상가 오픈 전 일정 맞춰서 빠르게 진행해주셨습니다.</p><span>부산 · 상가청소</span></article>
-          <article class="review"><strong>★★★★★</strong><p>필터 교체 주기까지 관리해줘서 너무 편해요.</p><span>서울 · 공기순환기 케어</span></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="faq">
-      <div class="container">
-        <div class="section__head">
-          <p class="section__kicker">FAQ</p>
-          <h2>자주 묻는 질문</h2>
-        </div>
-        <div class="faqList">
-          <details>
-            <summary>견적은 어떻게 산정되나요?</summary>
-            <p>면적, 오염도, 요청 범위, 장비 상태를 반영해 안내드립니다.</p>
-          </details>
-          <details>
-            <summary>당일 작업도 가능한가요?</summary>
-            <p>스케줄에 따라 가능하며, 긴급 건은 전화로 먼저 문의해주세요.</p>
-          </details>
-          <details>
-            <summary>사업장 정기 관리도 가능한가요?</summary>
-            <p>네. 주간/월간 단위 정기 방문 및 점검 리포트 제공이 가능합니다.</p>
-          </details>
-        </div>
-      </div>
-    </section>
-
-    <section class="section section--soft" id="estimate">
-      <div class="container estimateWrap">
-        <div>
-          <p class="section__kicker">CONTACT</p>
-          <h2>온라인 무료 견적</h2>
-          <p>서비스 종류, 지역, 희망일정을 남겨주시면 빠르게 연락드립니다.</p>
-        </div>
-        <form class="form form--card" id="estimateForm">
-          <label>이름/기관명</label>
-          <input name="org" placeholder="예) 다올웍스 / OO학교" required />
-
-          <label>연락처</label>
-          <input name="phone" placeholder="010-0000-0000" required />
-
-          <label>서비스</label>
-          <input name="service" placeholder="예) 입주청소 / 필터교체" required />
-
-          <label>지역</label>
-          <input name="area" placeholder="예) 울산 남구" required />
-
-          <label>상세 내용</label>
-          <textarea name="message" rows="5" placeholder="면적, 오염 상태, 희망 일정 등을 입력해주세요." required></textarea>
-
-          <button class="btn btn--block" type="submit">메일로 문의 보내기</button>
-          <small>* 서버 저장 없이 메일앱으로 연결됩니다.</small>
-        </form>
       </div>
     </section>
   </main>
 
-  <div class="floatCTA">
-    <a href="#estimate">무료견적</a>
-    <a href="tel:01000000000">전화상담</a>
-  </div>
-
   <footer class="footer">
-    <div class="container footer__inner">
-      <div>
-        <strong>다올웍스</strong>
-        <p>청소 · 공기순환기 필터 · 유지보수 전문</p>
-        <small>© <span id="year"></span> DAOLWORKS. All rights reserved.</small>
-      </div>
-      <div class="footer__links">
-        <a href="#services">서비스</a>
-        <a href="#pricing">가격안내</a>
-        <a href="#process">진행절차</a>
-        <a href="#estimate">견적문의</a>
-      </div>
-    </div>
+    <div class="container">© <span id="year"></span> DAOLWORKS</div>
   </footer>
 
   <script src="./script.js"></script>

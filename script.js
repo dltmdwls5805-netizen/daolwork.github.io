@@ -1,43 +1,115 @@
-const $ = (selector) => document.querySelector(selector);
+const $ = (s) => document.querySelector(s);
+const $$ = (s) => document.querySelectorAll(s);
 
 $("#year").textContent = new Date().getFullYear();
 
-const nav = $("#nav");
+const gnb = $("#gnb");
 $("#hamburger")?.addEventListener("click", () => {
-  nav?.classList.toggle("is-open");
+  gnb?.classList.toggle("is-open");
 });
 
-function toMailto(fd) {
-  const service = fd.get("service") || "";
-  const area = fd.get("area") || "";
-  const org = fd.get("org") || "";
-  const phone = fd.get("phone") || "";
-  const message = fd.get("message") || "";
+// 게시판 탭
+$$('.tab').forEach((tabBtn) => {
+  tabBtn.addEventListener('click', () => {
+    $$('.tab').forEach((el) => el.classList.remove('is-active'));
+    tabBtn.classList.add('is-active');
 
-  const subject = `[홈페이지 문의] ${service} / ${area}`.trim();
-  const body = [
-    `이름/기관명: ${org || "미입력"}`,
-    `서비스: ${service}`,
-    `지역: ${area}`,
-    `연락처: ${phone}`,
-    "",
-    `상세내용:\n${message || "상세 내용 없음"}`,
-  ].join("\n");
+    const key = tabBtn.dataset.board;
+    $$('.boardPanel').forEach((p) => p.classList.remove('is-active'));
+    $(`#board-${key}`)?.classList.add('is-active');
+  });
+});
 
-  const to = "contact@daolworks.co.kr";
-  return `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+const BOARD_KEYS = ['air', 'cleaning', 'aircon'];
+
+function storageKey(board) {
+  return `daol-board-${board}`;
 }
 
-$("#quickForm")?.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const fd = new FormData(e.target);
-  fd.set("org", "빠른문의");
-  fd.set("message", "빠른 무료 견적 폼으로 접수되었습니다.");
-  window.location.href = toMailto(fd);
+function loadPosts(board) {
+  const raw = localStorage.getItem(storageKey(board));
+  if (!raw) return [];
+  try {
+    return JSON.parse(raw);
+  } catch {
+    return [];
+  }
+}
+
+function savePosts(board, posts) {
+  localStorage.setItem(storageKey(board), JSON.stringify(posts));
+}
+
+function renderBoard(board) {
+  const list = document.querySelector(`[data-list="${board}"]`);
+  if (!list) return;
+
+  const posts = loadPosts(board);
+  if (!posts.length) {
+    list.innerHTML = '<div class="postCard"><p>등록된 시공사례가 없습니다. 첫 글을 등록해보세요.</p></div>';
+    return;
+  }
+
+  list.innerHTML = posts
+    .map((post) => {
+      const imageHtml = post.image ? `<img src="${post.image}" alt="${post.title}" />` : '';
+      return `
+        <article class="postCard">
+          <h4>${post.title}</h4>
+          <p>${post.content}</p>
+          ${imageHtml}
+          <div class="postMeta">${post.createdAt}</div>
+        </article>
+      `;
+    })
+    .join('');
+}
+
+function readFileAsDataURL(file) {
+  return new Promise((resolve, reject) => {
+    if (!file) {
+      resolve('');
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+$$('.postForm').forEach((form) => {
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const board = form.dataset.board;
+    if (!board) return;
+
+    const fd = new FormData(form);
+    const title = (fd.get('title') || '').toString().trim();
+    const content = (fd.get('content') || '').toString().trim();
+    const imageFile = fd.get('image');
+
+    if (!title || !content) return;
+
+    const image = imageFile instanceof File && imageFile.size > 0
+      ? await readFileAsDataURL(imageFile)
+      : '';
+
+    const newPost = {
+      title,
+      content,
+      image,
+      createdAt: new Date().toLocaleString('ko-KR'),
+    };
+
+    const posts = loadPosts(board);
+    posts.unshift(newPost);
+    savePosts(board, posts.slice(0, 30));
+
+    form.reset();
+    renderBoard(board);
+  });
 });
 
-$("#estimateForm")?.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const fd = new FormData(e.target);
-  window.location.href = toMailto(fd);
-});
+BOARD_KEYS.forEach(renderBoard);
