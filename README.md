@@ -1,1 +1,37 @@
 # daolwork.github.io
+ (cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF' 
+diff --git a/README.md b/README.md
+index 1067dd4b43c578c3740f5b902b3ff03f51201260..5017de15924156122919787f29465e7daa6a8a74 100644
+--- a/README.md
++++ b/README.md
+@@ -1 +1,25 @@
+-# daolwork.github.io
+\ No newline at end of file
++# daolwork.github.io
++
++다올웍스 정적 홈페이지 템플릿입니다.
++
++## 핵심 컨셉
++- 미소/아임웹 스타일의 깔끔한 상업형 랜딩 페이지
++- 메뉴: 회사소개 / 공기순환기 / 종합청소 / 에어컨청소
++- 카테고리별 시공사례 탭형 보드
++- `script.js` 상단 데이터만 수정하면 텍스트/서비스/사진 카드 자동 반영
++
++## 템플릿 수정 포인트
++`script.js`의 `SITE_DATA` 객체를 수정하세요.
++- `heroImage`: 메인 이미지
++- `stats`: 상단 지표 카드
++- `about`: 회사소개 문구/불릿
++- `services`: 서비스 카드(공기순환기/종합청소/에어컨청소)
++- `portfolio`: 시공사례 카드(이미지/제목/설명)
++
++이미지 경로는 외부 URL 또는 로컬 파일 경로(예: `./images/case01.jpg`)를 사용할 수 있습니다.
++
++## 실행
++```bash
++python3 -m http.server 4173
++```
++브라우저에서 `http://localhost:4173` 접속
+ 
+EOF
+)
