@@ -3,46 +3,57 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>다올웍스 | 공기순환기 · 종합청소 · 에어컨청소</title>
-  <meta name="description" content="다올웍스 회사소개, 공기순환기/종합청소/에어컨청소 서비스 및 시공사례 게시판" />
+  <title>다올웍스 | 공기순환기 · 종합청소 · 에어컨청소 전문</title>
+  <meta name="description" content="다올웍스 - 공기순환기 관리, 종합청소, 에어컨청소를 원스톱으로 제공하는 프리미엄 홈/비즈니스 케어 서비스" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
+  <div class="topbar">
+    <div class="container topbar__inner">
+      <p>첫 방문 고객 무료 현장 상담 진행 중</p>
+      <a href="tel:010-0000-0000">대표번호 010-0000-0000</a>
+    </div>
+  </div>
+
   <header class="header">
     <div class="container header__inner">
-      <a class="brand" href="#">다올웍스</a>
+      <a class="logo" href="#">DAOLWORKS</a>
 
-      <nav class="gnb" id="gnb">
+      <nav class="nav" id="nav">
         <a href="#about">회사소개</a>
 
-        <div class="menuGroup">
-          <button type="button" class="menuToggle">공기순환기</button>
-          <div class="submenu">
+        <div class="navGroup">
+          <button type="button">공기순환기</button>
+          <div class="dropdown">
             <a href="#air-filter">공기순환기 필터</a>
-            <a href="#board-air">공기순환기 시공사례</a>
+            <a href="#air-board">공기순환기 시공사례</a>
           </div>
         </div>
 
-        <div class="menuGroup">
-          <button type="button" class="menuToggle">종합청소</button>
-          <div class="submenu">
-            <a href="#cleaning-movein">입주청소</a>
-            <a href="#cleaning-moveout">이사청소</a>
-            <a href="#cleaning-disinfection">방역</a>
-            <a href="#cleaning-trash">쓰레기집청소</a>
-            <a href="#cleaning-factory">공장청소</a>
-            <a href="#board-cleaning">종합청소 시공사례</a>
+        <div class="navGroup">
+          <button type="button">종합청소</button>
+          <div class="dropdown">
+            <a href="#cleaning-services">서비스 안내</a>
+            <a href="#cleaning-board">종합청소 시공사례</a>
           </div>
         </div>
 
-        <div class="menuGroup">
-          <button type="button" class="menuToggle">에어컨청소</button>
-          <div class="submenu">
+        <div class="navGroup">
+          <button type="button">에어컨청소</button>
+          <div class="dropdown">
             <a href="#aircon">에어컨청소 안내</a>
-            <a href="#board-aircon">에어컨청소 시공사례</a>
+            <a href="#aircon-board">에어컨청소 시공사례</a>
           </div>
         </div>
       </nav>
+
+      <div class="headerActions">
+        <a class="btn btn--ghost" href="#contact">문의하기</a>
+        <a class="btn" href="#portfolio">시공사례</a>
+      </div>
 
       <button class="hamburger" id="hamburger" aria-label="메뉴 열기">☰</button>
     </div>
@@ -50,100 +61,132 @@
 
   <main>
     <section class="hero">
-      <div class="container hero__inner">
-        <h1>생활/사업장 청소부터 공기순환기·에어컨까지</h1>
-        <p>현장 맞춤 시공과 시공사례 공유를 통해 신뢰를 만드는 다올웍스입니다.</p>
-        <a class="btn" href="#boards">시공사례 보러가기</a>
+      <div class="container hero__grid">
+        <div class="hero__copy">
+          <span class="badge">Premium Clean Care</span>
+          <h1>돈 주고 맡긴 것 같은
+            <strong>프리미엄 홈페이지형</strong>
+            서비스 소개 페이지
+          </h1>
+          <p>공기순환기 · 종합청소 · 에어컨청소를 한눈에 보여주고, 시공사례 사진을 템플릿처럼 손쉽게 수정할 수 있도록 구성했습니다.</p>
+          <div class="hero__cta">
+            <a class="btn" href="#contact">무료 상담 신청</a>
+            <a class="btn btn--ghost" href="#template-guide">템플릿 수정 가이드</a>
+          </div>
+          <div class="hero__stats" id="heroStats"></div>
+        </div>
+
+        <div class="hero__visual">
+          <img id="heroImage" alt="다올웍스 대표 이미지" />
+        </div>
       </div>
     </section>
 
     <section id="about" class="section">
       <div class="container">
-        <h2>회사소개</h2>
-        <p class="muted">다올웍스는 공기순환기 관리, 종합청소, 에어컨청소를 한 번에 제공하는 현장 전문 팀입니다.</p>
+        <div class="sectionHead">
+          <span>ABOUT US</span>
+          <h2>회사소개</h2>
+        </div>
+        <div class="aboutCard">
+          <p id="aboutText"></p>
+          <ul id="aboutBullets" class="bulletList"></ul>
+        </div>
       </div>
     </section>
 
     <section id="air-filter" class="section section--soft">
       <div class="container">
-        <h2>공기순환기 필터</h2>
-        <p class="muted">필터 규격 확인, 교체, 점검 리포트까지 진행합니다.</p>
+        <div class="sectionHead">
+          <span>AIR CARE</span>
+          <h2>공기순환기 필터</h2>
+        </div>
+        <div class="serviceGrid" id="airServices"></div>
       </div>
     </section>
 
-    <section id="cleaning-movein" class="section">
-      <div class="container"><h2>입주청소</h2><p class="muted">준공 먼지/오염 제거 중심의 신규 입주 전 청소.</p></div>
-    </section>
-
-    <section id="cleaning-moveout" class="section section--soft">
-      <div class="container"><h2>이사청소</h2><p class="muted">생활 오염 제거와 공간 컨디션 회복에 집중합니다.</p></div>
-    </section>
-
-    <section id="cleaning-disinfection" class="section">
-      <div class="container"><h2>방역</h2><p class="muted">사업장/주거공간 대상 방역 작업과 점검 기록 제공.</p></div>
-    </section>
-
-    <section id="cleaning-trash" class="section section--soft">
-      <div class="container"><h2>쓰레기집청소</h2><p class="muted">분리수거/폐기/살균까지 단계별로 수행합니다.</p></div>
-    </section>
-
-    <section id="cleaning-factory" class="section">
-      <div class="container"><h2>공장청소</h2><p class="muted">현장 동선과 안전기준을 반영해 맞춤 청소를 진행합니다.</p></div>
+    <section id="cleaning-services" class="section">
+      <div class="container">
+        <div class="sectionHead">
+          <span>TOTAL CLEANING</span>
+          <h2>종합청소 서비스</h2>
+        </div>
+        <div class="serviceGrid" id="cleaningServices"></div>
+      </div>
     </section>
 
     <section id="aircon" class="section section--soft">
-      <div class="container"><h2>에어컨청소</h2><p class="muted">분해 세척, 냄새/곰팡이 개선, 작동 상태 점검.</p></div>
+      <div class="container">
+        <div class="sectionHead">
+          <span>AIRCON CLEANING</span>
+          <h2>에어컨청소 서비스</h2>
+        </div>
+        <div class="serviceGrid" id="airconServices"></div>
+      </div>
     </section>
 
-    <section id="boards" class="section">
+    <section id="portfolio" class="section">
       <div class="container">
-        <h2>시공사례 게시판</h2>
-        <p class="muted">각 카테고리별로 글 작성과 사진 등록이 가능합니다(브라우저 로컬 저장).</p>
+        <div class="sectionHead">
+          <span>PORTFOLIO</span>
+          <h2>시공사례 게시판 템플릿</h2>
+        </div>
 
         <div class="boardTabs">
-          <button class="tab is-active" data-board="air">공기순환기 시공사례</button>
-          <button class="tab" data-board="cleaning">종합청소 시공사례</button>
-          <button class="tab" data-board="aircon">에어컨청소 시공사례</button>
+          <button class="tab is-active" data-tab="air-board">공기순환기 시공사례</button>
+          <button class="tab" data-tab="cleaning-board">종합청소 시공사례</button>
+          <button class="tab" data-tab="aircon-board">에어컨청소 시공사례</button>
         </div>
 
-        <div class="boardPanel is-active" id="board-air">
-          <h3>공기순환기 시공사례</h3>
-          <form class="postForm" data-board="air">
-            <input name="title" placeholder="제목" required />
-            <textarea name="content" rows="4" placeholder="시공 내용" required></textarea>
-            <input type="file" name="image" accept="image/*" />
-            <button class="btn" type="submit">글 등록</button>
-          </form>
-          <div class="postList" data-list="air"></div>
+        <div class="boardPanel is-active" id="air-board">
+          <div class="portfolioGrid" id="airBoardList"></div>
         </div>
 
-        <div class="boardPanel" id="board-cleaning">
-          <h3>종합청소 시공사례</h3>
-          <form class="postForm" data-board="cleaning">
-            <input name="title" placeholder="제목" required />
-            <textarea name="content" rows="4" placeholder="시공 내용" required></textarea>
-            <input type="file" name="image" accept="image/*" />
-            <button class="btn" type="submit">글 등록</button>
-          </form>
-          <div class="postList" data-list="cleaning"></div>
+        <div class="boardPanel" id="cleaning-board">
+          <div class="portfolioGrid" id="cleaningBoardList"></div>
         </div>
 
-        <div class="boardPanel" id="board-aircon">
-          <h3>에어컨청소 시공사례</h3>
-          <form class="postForm" data-board="aircon">
-            <input name="title" placeholder="제목" required />
-            <textarea name="content" rows="4" placeholder="시공 내용" required></textarea>
-            <input type="file" name="image" accept="image/*" />
-            <button class="btn" type="submit">글 등록</button>
-          </form>
-          <div class="postList" data-list="aircon"></div>
+        <div class="boardPanel" id="aircon-board">
+          <div class="portfolioGrid" id="airconBoardList"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="template-guide" class="section section--soft">
+      <div class="container">
+        <div class="sectionHead">
+          <span>TEMPLATE GUIDE</span>
+          <h2>아임웹처럼 쉽게 수정하는 방법</h2>
+        </div>
+        <div class="guideCard">
+          <ol>
+            <li><code>script.js</code> 상단 <code>SITE_DATA</code> 객체에서 텍스트/통계/서비스 항목을 수정합니다.</li>
+            <li><code>portfolio</code> 배열의 <code>image</code>, <code>title</code>, <code>desc</code>만 바꾸면 시공사례 카드가 자동 반영됩니다.</li>
+            <li>사진은 외부 URL 또는 같은 폴더 경로(예: <code>./images/case1.jpg</code>)를 넣으면 됩니다.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="container contactCard">
+        <div>
+          <h2>견적/상담 문의</h2>
+          <p>전화 또는 온라인 문의로 빠르게 상담받으세요.</p>
+        </div>
+        <div class="contactButtons">
+          <a class="btn" href="tel:010-0000-0000">전화 상담</a>
+          <a class="btn btn--ghost" href="mailto:contact@daolworks.co.kr">이메일 문의</a>
         </div>
       </div>
     </section>
   </main>
 
   <footer class="footer">
-    <div class="container">© <span id="year"></span> DAOLWORKS</div>
+    <div class="container footer__inner">
+      <strong>다올웍스</strong>
+      <p>© <span id="year"></span> DAOLWORKS. All rights reserved.</p>
+    </div>
   </footer>
 
   <script src="./script.js"></script>
