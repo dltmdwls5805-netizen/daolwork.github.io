@@ -1,3 +1,4 @@
+ (cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF' 
 diff --git a/script.js b/script.js
 index b2634ab8fc46f5ebab7a97985af52541297fce8d..2f1562be982c2832b889338606fa3b8b3dc174b6 100644
 --- a/script.js
@@ -220,3 +221,6 @@ index b2634ab8fc46f5ebab7a97985af52541297fce8d..2f1562be982c2832b889338606fa3b8b
 -  window.location.href = toMailto(fd);
 -});
 +init();
+ 
+EOF
+)
