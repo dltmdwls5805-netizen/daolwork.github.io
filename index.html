@@ -1,9 +1,9 @@
  (cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF' 
 diff --git a/index.html b/index.html
-index 3114d0df61cba14192f339c97744da9f0cb7bf6b..63148463ab4b2f49e9e4bc042a2e3fb5df5c2896 100644
+index 3114d0df61cba14192f339c97744da9f0cb7bf6b..d036843d232d58bcdabbb5d04bdee8784181bc2d 100644
 --- a/index.html
 +++ b/index.html
-@@ -1,480 +1,194 @@
+@@ -1,480 +1,80 @@
  <!doctype html>
  <html lang="ko">
  <head>
@@ -12,18 +12,15 @@ index 3114d0df61cba14192f339c97744da9f0cb7bf6b..63148463ab4b2f49e9e4bc042a2e3fb5
 -  <title>다올웍스 | 청소 · 공기순환기 필터 · 유지보수</title>
 -  <meta name="description" content="청소(입주/이사/거주/사무실) + 공기순환기(필터/청소/유지보수) 원스톱. 직영팀 운영, 표준 프로세스, 작업 전후 공유." />
 -
-+  <title>다올웍스 | 공기순환기 · 종합청소 · 에어컨청소 전문</title>
-+  <meta name="description" content="다올웍스 - 공기순환기 관리, 종합청소, 에어컨청소를 원스톱으로 제공하는 프리미엄 홈/비즈니스 케어 서비스" />
-+  <link rel="preconnect" href="https://fonts.googleapis.com" />
-+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
++  <title>다올웍스 | 공기순환기 · 종합청소 · 에어컨청소</title>
++  <meta name="description" content="다올웍스 - 공기순환기, 종합청소, 에어컨청소 시공사례" />
    <link rel="stylesheet" href="./styles.css" />
  </head>
 -
  <body>
 -  <!-- Top CTA Bar -->
-   <div class="topbar">
-     <div class="container topbar__inner">
+-  <div class="topbar">
+-    <div class="container topbar__inner">
 -      <div class="topbar__left">
 -        <span class="pill">프리미엄 케어</span>
 -        <span class="muted">청소 · 공기순환기 · 필터/유지보수</span>
@@ -32,11 +29,9 @@ index 3114d0df61cba14192f339c97744da9f0cb7bf6b..63148463ab4b2f49e9e4bc042a2e3fb5
 -        <a class="topbar__cta" href="#estimate">견적문의 바로가기</a>
 -        <a class="topbar__tel" href="tel:01000000000">010-0000-0000</a>
 -      </div>
-+      <p>첫 방문 고객 무료 현장 상담 진행 중</p>
-+      <a href="tel:010-0000-0000">대표번호 010-0000-0000</a>
-     </div>
-   </div>
- 
+-    </div>
+-  </div>
+-
 -  <!-- Header -->
 -  <header class="header" id="header">
 +  <header class="header">
@@ -48,7 +43,7 @@ index 3114d0df61cba14192f339c97744da9f0cb7bf6b..63148463ab4b2f49e9e4bc042a2e3fb5
 -          <span>Clean & Air Care</span>
 -        </div>
 -      </a>
-+      <a class="logo" href="#">DAOLWORKS</a>
++      <a class="logo" href="#home">다올웍스</a>
  
        <nav class="nav" id="nav">
 -        <a href="#services">대표서비스</a>
@@ -57,76 +52,44 @@ index 3114d0df61cba14192f339c97744da9f0cb7bf6b..63148463ab4b2f49e9e4bc042a2e3fb5
 -        <a href="#range">서비스 범위</a>
 -        <a href="#reviews">후기</a>
 -        <a class="btn btn--small" href="#estimate">온라인 견적</a>
--      </nav>
 +        <a href="#about">회사소개</a>
++        <a href="#air-board">공기순환기 시공사례</a>
++        <a href="#cleaning-board">종합청소 시공사례</a>
++        <a href="#aircon-board">에어컨청소 시공사례</a>
+       </nav>
  
 -      <button class="hamburger" id="hamburger" aria-label="메뉴">
 -        <span></span><span></span><span></span>
 -      </button>
 -    </div>
 -  </header>
-+        <div class="navGroup">
-+          <button type="button">공기순환기</button>
-+          <div class="dropdown">
-+            <a href="#air-filter">공기순환기 필터</a>
-+            <a href="#air-board">공기순환기 시공사례</a>
-+          </div>
-+        </div>
- 
+-
 -  <!-- Live ticker -->
 -  <section class="ticker" aria-label="실시간 견적현황">
 -    <div class="container ticker__inner">
 -      <div class="ticker__label">실시간 견적현황</div>
 -      <div class="ticker__track" id="tickerTrack">
 -        <!-- JS가 채움 -->
-+        <div class="navGroup">
-+          <button type="button">종합청소</button>
-+          <div class="dropdown">
-+            <a href="#cleaning-services">서비스 안내</a>
-+            <a href="#cleaning-board">종합청소 시공사례</a>
-+          </div>
-+        </div>
-+
-+        <div class="navGroup">
-+          <button type="button">에어컨청소</button>
-+          <div class="dropdown">
-+            <a href="#aircon">에어컨청소 안내</a>
-+            <a href="#aircon-board">에어컨청소 시공사례</a>
-+          </div>
-+        </div>
-+      </nav>
-+
-+      <div class="headerActions">
-+        <a class="btn btn--ghost" href="#contact">문의하기</a>
-+        <a class="btn" href="#portfolio">시공사례</a>
-       </div>
-+
-+      <button class="hamburger" id="hamburger" aria-label="메뉴 열기">☰</button>
-     </div>
+-      </div>
+-    </div>
 -  </section>
-+  </header>
- 
+-
 -  <!-- Hero -->
-   <main>
-     <section class="hero">
-       <div class="container hero__grid">
-         <div class="hero__copy">
+-  <main>
+-    <section class="hero">
+-      <div class="container hero__grid">
+-        <div class="hero__copy">
 -          <p class="hero__kicker">서비스 만족도 · 재이용 중심 운영</p>
 -          <h1 class="hero__title">
 -            프리미엄 청소와<br/>
 -            공기순환기 케어를 한 번에
-+          <span class="badge">Premium Clean Care</span>
-+          <h1>돈 주고 맡긴 것 같은
-+            <strong>프리미엄 홈페이지형</strong>
-+            서비스 소개 페이지
-           </h1>
+-          </h1>
 -          <p class="hero__desc">
 -            입주/이사/거주/사무실 청소부터 공기순환기 <strong>필터 교체 · 내부 청소 · 성능 점검</strong>까지
 -            원스톱으로 진행합니다.
 -          </p>
 -
-+          <p>공기순환기 · 종합청소 · 에어컨청소를 한눈에 보여주고, 시공사례 사진을 템플릿처럼 손쉽게 수정할 수 있도록 구성했습니다.</p>
-           <div class="hero__cta">
+-          <div class="hero__cta">
 -            <a class="btn" href="#estimate">무료 견적 받기</a>
 -            <a class="btn btn--ghost" href="tel:01000000000">전화 상담</a>
 -          </div>
@@ -144,12 +107,9 @@ index 3114d0df61cba14192f339c97744da9f0cb7bf6b..63148463ab4b2f49e9e4bc042a2e3fb5
 -              <strong>A/S 케어</strong>
 -              <span class="muted">미흡 시 재점검</span>
 -            </div>
-+            <a class="btn" href="#contact">무료 상담 신청</a>
-+            <a class="btn btn--ghost" href="#template-guide">템플릿 수정 가이드</a>
-           </div>
-+          <div class="hero__stats" id="heroStats"></div>
-         </div>
- 
+-          </div>
+-        </div>
+-
 -        <div class="hero__panel">
 -          <div class="panel">
 -            <div class="panel__head">
@@ -195,25 +155,22 @@ index 3114d0df61cba14192f339c97744da9f0cb7bf6b..63148463ab4b2f49e9e4bc042a2e3fb5
 -              </div>
 -            </form>
 -          </div>
-+        <div class="hero__visual">
-+          <img id="heroImage" alt="다올웍스 대표 이미지" />
-         </div>
+-        </div>
++      <div class="headerActions">
++        <a class="btn btn--kakao" id="kakaoBtn" href="#" target="_blank" rel="noopener">카카오톡 문의하기</a>
++        <a class="btn" id="callBtn" href="tel:010-0000-0000">문의하기</a>
        </div>
--
--      <div class="hero__bg" aria-hidden="true"></div>
-     </section>
  
+-      <div class="hero__bg" aria-hidden="true"></div>
+-    </section>
+-
 -    <!-- Services -->
 -    <section id="services" class="section">
-+    <section id="about" class="section">
-       <div class="container">
+-      <div class="container">
 -        <div class="section__head">
 -          <h2>다올웍스 대표서비스</h2>
 -          <p class="muted">필요한 서비스를 “카테고리형”으로 빠르게 선택할 수 있게 구성했습니다.</p>
-+        <div class="sectionHead">
-+          <span>ABOUT US</span>
-+          <h2>회사소개</h2>
-         </div>
+-        </div>
 -
 -        <div class="tabs" role="tablist">
 -          <button class="tab is-active" data-tab="home" type="button">홈클리닝</button>
@@ -309,21 +266,27 @@ index 3114d0df61cba14192f339c97744da9f0cb7bf6b..63148463ab4b2f49e9e4bc042a2e3fb5
 -            </div>
 -          </div>
 -        </div>
--
++      <button class="hamburger" id="hamburger" aria-label="메뉴 열기">☰</button>
++    </div>
++  </header>
+ 
 -        <div class="section__cta">
 -          <a class="btn" href="#estimate">지금 온라인 견적 작성</a>
 -          <a class="btn btn--ghost" href="tel:01000000000">상담원 연결</a>
-+        <div class="aboutCard">
-+          <p id="aboutText"></p>
-+          <ul id="aboutBullets" class="bulletList"></ul>
++  <main id="home">
++    <section class="hero hero--large">
++      <img id="heroImage" alt="공기순환기 메인 이미지" />
++      <div class="hero__overlay">
++        <div class="container">
++          <h1>다올웍스</h1>
++          <p>공기순환기 · 종합청소 · 에어컨청소 시공사례를 상단 메뉴에서 바로 확인하세요.</p>
          </div>
        </div>
      </section>
  
 -    <!-- Why -->
 -    <section id="why" class="section section--soft">
-+    <section id="air-filter" class="section section--soft">
-       <div class="container">
+-      <div class="container">
 -        <div class="section__head">
 -          <h2>왜 다올웍스에 맡겨야 하나요?</h2>
 -          <p class="muted">현장에서 중요한 건 “표준화 + 재점검 + 결과 공유”입니다.</p>
@@ -346,30 +309,16 @@ index 3114d0df61cba14192f339c97744da9f0cb7bf6b..63148463ab4b2f49e9e4bc042a2e3fb5
 -            <h3>A/S 케어</h3>
 -            <p class="muted">미흡 사항 발생 시 재점검/보완 진행(정책 범위 내).</p>
 -          </div>
-+        <div class="sectionHead">
-+          <span>AIR CARE</span>
-+          <h2>공기순환기 필터</h2>
-         </div>
-+        <div class="serviceGrid" id="airServices"></div>
-+      </div>
-+    </section>
- 
+-        </div>
+-
 -        <div class="highlight">
 -          <div>
 -            <h3>친환경 · 스팀 장비 중심 운영</h3>
 -            <p class="muted">인체/환경 안전을 고려한 약제 선택과 장비 운영을 지향합니다.</p>
 -          </div>
 -          <a class="btn btn--ghost" href="#estimate">견적 문의</a>
-+    <section id="cleaning-services" class="section">
-+      <div class="container">
-+        <div class="sectionHead">
-+          <span>TOTAL CLEANING</span>
-+          <h2>종합청소 서비스</h2>
-         </div>
-+        <div class="serviceGrid" id="cleaningServices"></div>
-+      </div>
-+    </section>
- 
+-        </div>
+-
 -        <div class="trustStrip">
 -          <div class="trustItem">
 -            <strong>보험/안전</strong>
@@ -383,52 +332,44 @@ index 3114d0df61cba14192f339c97744da9f0cb7bf6b..63148463ab4b2f49e9e4bc042a2e3fb5
 -            <strong>원스톱</strong>
 -            <span class="muted">청소 + 공기순환</span>
 -          </div>
-+    <section id="aircon" class="section section--soft">
-+      <div class="container">
-+        <div class="sectionHead">
-+          <span>AIRCON CLEANING</span>
-+          <h2>에어컨청소 서비스</h2>
-         </div>
-+        <div class="serviceGrid" id="airconServices"></div>
+-        </div>
++    <section id="about" class="section">
++      <div class="container aboutCard">
++        <h2>회사소개</h2>
++        <p id="aboutText"></p>
        </div>
      </section>
  
 -    <!-- Process -->
 -    <section id="process" class="section">
-+    <section id="portfolio" class="section">
++    <section id="air-board" class="section section--soft">
        <div class="container">
 -        <div class="section__head">
 -          <h2>진행 프로세스</h2>
 -          <p class="muted">신청부터 완료 보고까지, 단계별로 안내합니다.</p>
-+        <div class="sectionHead">
-+          <span>PORTFOLIO</span>
-+          <h2>시공사례 게시판 템플릿</h2>
-         </div>
- 
+-        </div>
+-
 -        <div class="process">
 -          <div class="step"><span>01</span><strong>상담 신청</strong><em class="muted">전화/온라인 접수</em></div>
 -          <div class="step"><span>02</span><strong>현장 확인</strong><em class="muted">범위/상태 파악</em></div>
 -          <div class="step"><span>03</span><strong>일정 확정</strong><em class="muted">방문 일정 조율</em></div>
 -          <div class="step"><span>04</span><strong>작업/검수</strong><em class="muted">체크리스트 기반</em></div>
 -          <div class="step"><span>05</span><strong>완료 보고</strong><em class="muted">전후 공유/A/S 안내</em></div>
-+        <div class="boardTabs">
-+          <button class="tab is-active" data-tab="air-board">공기순환기 시공사례</button>
-+          <button class="tab" data-tab="cleaning-board">종합청소 시공사례</button>
-+          <button class="tab" data-tab="aircon-board">에어컨청소 시공사례</button>
-         </div>
--      </div>
--    </section>
+-        </div>
++        <h2>공기순환기 시공사례</h2>
++        <div class="portfolioGrid" id="airBoardList"></div>
+       </div>
+     </section>
  
 -    <!-- Range -->
 -    <section id="range" class="section section--soft">
--      <div class="container">
++    <section id="cleaning-board" class="section">
+       <div class="container">
 -        <div class="section__head">
 -          <h2>서비스 범위</h2>
 -          <p class="muted">현장 상황/요청에 따라 범위는 조정될 수 있습니다.</p>
-+        <div class="boardPanel is-active" id="air-board">
-+          <div class="portfolioGrid" id="airBoardList"></div>
-         </div>
- 
+-        </div>
+-
 -        <div class="rangeGrid">
 -          <div class="rangeCard">
 -            <h3>홈클리닝 기본</h3>
@@ -454,27 +395,20 @@ index 3114d0df61cba14192f339c97744da9f0cb7bf6b..63148463ab4b2f49e9e4bc042a2e3fb5
 -              <li>가동 상태 점검 및 이력 관리</li>
 -            </ul>
 -          </div>
-+        <div class="boardPanel" id="cleaning-board">
-+          <div class="portfolioGrid" id="cleaningBoardList"></div>
-+        </div>
-+
-+        <div class="boardPanel" id="aircon-board">
-+          <div class="portfolioGrid" id="airconBoardList"></div>
-         </div>
+-        </div>
++        <h2>종합청소 시공사례</h2>
++        <div class="portfolioGrid" id="cleaningBoardList"></div>
        </div>
      </section>
  
 -    <!-- Reviews -->
 -    <section id="reviews" class="section">
-+    <section id="template-guide" class="section section--soft">
++    <section id="aircon-board" class="section section--soft">
        <div class="container">
 -        <div class="section__head">
 -          <h2>이용 고객 후기</h2>
 -          <p class="muted">후기는 예시 문구입니다. 실제 후기 텍스트로 교체해 주세요.</p>
-+        <div class="sectionHead">
-+          <span>TEMPLATE GUIDE</span>
-+          <h2>아임웹처럼 쉽게 수정하는 방법</h2>
-         </div>
+-        </div>
 -
 -        <div class="reviewGrid">
 -          <article class="review">
@@ -492,28 +426,17 @@ index 3114d0df61cba14192f339c97744da9f0cb7bf6b..63148463ab4b2f49e9e4bc042a2e3fb5
 -            <p>공기순환기 필터 교체랑 내부 청소까지 같이 받았어요. 사진으로 설명해줘서 신뢰가 갔습니다.</p>
 -            <span class="muted">서울 · 오피스텔</span>
 -          </article>
-+        <div class="guideCard">
-+          <ol>
-+            <li><code>script.js</code> 상단 <code>SITE_DATA</code> 객체에서 텍스트/통계/서비스 항목을 수정합니다.</li>
-+            <li><code>portfolio</code> 배열의 <code>image</code>, <code>title</code>, <code>desc</code>만 바꾸면 시공사례 카드가 자동 반영됩니다.</li>
-+            <li>사진은 외부 URL 또는 같은 폴더 경로(예: <code>./images/case1.jpg</code>)를 넣으면 됩니다.</li>
-+          </ol>
-         </div>
-       </div>
-     </section>
- 
+-        </div>
+-      </div>
+-    </section>
+-
 -    <!-- Estimate -->
 -    <section id="estimate" class="section section--soft">
 -      <div class="container">
 -        <div class="section__head">
 -          <h2>온라인 견적</h2>
 -          <p class="muted">작성 내용을 바탕으로 상담원이 빠르게 연락드립니다.</p>
-+    <section id="contact" class="section">
-+      <div class="container contactCard">
-+        <div>
-+          <h2>견적/상담 문의</h2>
-+          <p>전화 또는 온라인 문의로 빠르게 상담받으세요.</p>
-         </div>
+-        </div>
 -
 -        <div class="estimate">
 -          <div class="estimate__left">
@@ -561,10 +484,9 @@ index 3114d0df61cba14192f339c97744da9f0cb7bf6b..63148463ab4b2f49e9e4bc042a2e3fb5
 -              <p class="tiny muted">* 서버 저장 없이 메일앱으로 전송됩니다.</p>
 -            </form>
 -          </div>
-+        <div class="contactButtons">
-+          <a class="btn" href="tel:010-0000-0000">전화 상담</a>
-+          <a class="btn btn--ghost" href="mailto:contact@daolworks.co.kr">이메일 문의</a>
-         </div>
+-        </div>
++        <h2>에어컨청소 시공사례</h2>
++        <div class="portfolioGrid" id="airconBoardList"></div>
        </div>
      </section>
    </main>
@@ -591,7 +513,7 @@ index 3114d0df61cba14192f339c97744da9f0cb7bf6b..63148463ab4b2f49e9e4bc042a2e3fb5
 -        <a href="#estimate">견적</a>
 -      </div>
 +      <strong>다올웍스</strong>
-+      <p>© <span id="year"></span> DAOLWORKS. All rights reserved.</p>
++      <p>© <span id="year"></span> 다올웍스. All rights reserved.</p>
      </div>
    </footer>
  

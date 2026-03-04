@@ -1,226 +1,473 @@
  (cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF' 
-diff --git a/script.js b/script.js
-index b2634ab8fc46f5ebab7a97985af52541297fce8d..2f1562be982c2832b889338606fa3b8b3dc174b6 100644
---- a/script.js
-+++ b/script.js
-@@ -1,95 +1,136 @@
--const $ = (s) => document.querySelector(s);
-+const SITE_DATA = {
-+  heroImage: "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=1400&q=80",
-+  stats: [
-+    { value: "4.9/5.0", label: "고객 만족도" },
-+    { value: "6,000+", label: "누적 시공 건수" },
-+    { value: "48h", label: "평균 상담 응답" },
-+  ],
-+  about: {
-+    text: "다올웍스는 청소 결과의 품질과 운영의 투명성을 가장 중요하게 생각합니다. 작업 전 상담부터 완료 후 공유까지 표준화된 프로세스로 운영합니다.",
-+    bullets: [
-+      "직영팀 기반의 일관된 시공 퀄리티",
-+      "공기순환기 · 종합청소 · 에어컨청소 원스톱 제공",
-+      "현장 사진 기반 결과 공유 및 사후 케어",
-+    ],
-+  },
-+  services: {
-+    air: [
-+      { title: "필터 규격 진단", desc: "모델/환경에 맞는 규격 확인 및 교체 주기 설계" },
-+      { title: "필터 교체 작업", desc: "안전 기준에 맞춘 신속한 필터 교체" },
-+      { title: "점검 리포트", desc: "교체 내역과 상태를 문서로 정리" },
-+    ],
-+    cleaning: [
-+      { title: "입주청소", desc: "준공 먼지·오염 제거 중심의 입주 전 작업" },
-+      { title: "이사청소", desc: "생활 오염 제거 및 쾌적한 공간 복원" },
-+      { title: "방역/특수청소", desc: "방역, 쓰레기집, 공장청소까지 맞춤 대응" },
-+    ],
-+    aircon: [
-+      { title: "분해 세척", desc: "열교환기/팬 오염 제거로 냄새 개선" },
-+      { title: "곰팡이 케어", desc: "위생 중심 약제 적용 및 살균 관리" },
-+      { title: "가동 점검", desc: "청소 후 작동 상태 확인 및 안내" },
-+    ],
-+  },
-+  portfolio: {
-+    air: [
-+      { image: "https://images.unsplash.com/photo-1581092787765-e3feb951d987?auto=format&fit=crop&w=1200&q=80", title: "학교 공기순환기 필터 교체", desc: "교실 24대 필터 교체 및 점검 완료" },
-+      { image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1200&q=80", title: "사무실 공조 라인 점검", desc: "필터 규격 재설정 및 주기 관리 시작" },
-+      { image: "https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=1200&q=80", title: "공공시설 환기장치 관리", desc: "분기별 유지보수 계약 현장" },
-+    ],
-+    cleaning: [
-+      { image: "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=1200&q=80", title: "신축 아파트 입주청소", desc: "34평 입주 전 오염 제거 및 마감" },
-+      { image: "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=1200&q=80", title: "상가 오픈 전 청소", desc: "유리/바닥/집기 오염 제거" },
-+      { image: "https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=1200&q=80", title: "특수 공간 정리 청소", desc: "폐기 분류 + 살균 + 악취 개선" },
-+    ],
-+    aircon: [
-+      { image: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=1200&q=80", title: "시스템 에어컨 분해세척", desc: "사업장 천장형 에어컨 클리닝" },
-+      { image: "https://images.unsplash.com/photo-1554995207-c18c203602cb?auto=format&fit=crop&w=1200&q=80", title: "가정용 벽걸이 에어컨", desc: "곰팡이 냄새 개선 시공" },
-+      { image: "https://images.unsplash.com/photo-1565538810643-b5bdb714032a?auto=format&fit=crop&w=1200&q=80", title: "학원 다중 에어컨 관리", desc: "여름 시즌 사전 점검 및 세척" },
-+    ],
-+  },
-+};
- 
--$("#year").textContent = new Date().getFullYear();
-+const $ = (s) => document.querySelector(s);
-+const $$ = (s) => document.querySelectorAll(s);
- 
--// Mobile nav
--const nav = $("#nav");
--$("#hamburger")?.addEventListener("click", () => {
--  nav.classList.toggle("is-open");
--});
-+function renderStats() {
-+  const el = $("#heroStats");
-+  if (!el) return;
-+  el.innerHTML = SITE_DATA.stats
-+    .map((s) => `<div class="statCard"><strong>${s.value}</strong><span>${s.label}</span></div>`)
-+    .join("");
-+}
- 
--// Tabs
--document.querySelectorAll(".tab").forEach(btn => {
--  btn.addEventListener("click", () => {
--    document.querySelectorAll(".tab").forEach(b => b.classList.remove("is-active"));
--    btn.classList.add("is-active");
-+function renderAbout() {
-+  const textEl = $("#aboutText");
-+  const listEl = $("#aboutBullets");
-+  if (!textEl || !listEl) return;
- 
--    const tab = btn.dataset.tab;
--    document.querySelectorAll(".tabPanel").forEach(p => p.classList.remove("is-active"));
--    $("#tab-" + tab).classList.add("is-active");
--  });
--});
-+  textEl.textContent = SITE_DATA.about.text;
-+  listEl.innerHTML = SITE_DATA.about.bullets.map((b) => `<li>${b}</li>`).join("");
-+}
- 
--// Live ticker (실시간 견적현황 느낌)
--const tickerTrack = $("#tickerTrack");
--const samples = [
--  "울산 남구(입주청소) / 김**",
--  "부산 해운대(사무실 청소) / 박**",
--  "서울 강서(필터 교체) / ○○초",
--  "경기 수원(이사청소) / 이**",
--  "인천 연수(공기순환기 점검) / 정**",
--  "대구 수성(거주청소) / 최**",
--  "광주 북구(정기청소) / 한**",
--];
-+function renderServiceGrid(targetId, items) {
-+  const el = $(targetId);
-+  if (!el) return;
-+  el.innerHTML = items
-+    .map((item) => `<article class="serviceCard"><h3>${item.title}</h3><p>${item.desc}</p></article>`)
-+    .join("");
-+}
- 
--function fillTicker() {
--  if (!tickerTrack) return;
--  // 두 번 이어붙여서 ‘흐르는’ 느낌
--  const text = [...samples, ...samples]
--    .map(s => `<span class="ticker__item">• ${s}</span>`)
-+function renderPortfolio(targetId, items) {
-+  const el = $(targetId);
-+  if (!el) return;
-+  el.innerHTML = items
-+    .map(
-+      (item) => `
-+      <article class="portfolioCard">
-+        <img src="${item.image}" alt="${item.title}" />
-+        <div class="portfolioCard__body">
-+          <h3>${item.title}</h3>
-+          <p>${item.desc}</p>
-+        </div>
-+      </article>
-+    `,
-+    )
-     .join("");
--  tickerTrack.innerHTML = text;
-+}
-+
-+function setupTabs() {
-+  $$(".tab").forEach((tab) => {
-+    tab.addEventListener("click", () => {
-+      const id = tab.dataset.tab;
-+      $$(".tab").forEach((t) => t.classList.remove("is-active"));
-+      tab.classList.add("is-active");
-+      $$(".boardPanel").forEach((p) => p.classList.remove("is-active"));
-+      $(`#${id}`)?.classList.add("is-active");
-+    });
-+  });
-+}
- 
--  // 간단 마퀴 효과
--  let x = 0;
--  const speed = 0.4;
--  const step = () => {
--    x -= speed;
--    tickerTrack.style.transform = `translateX(${x}px)`;
--    // 대충 루프
--    if (Math.abs(x) > tickerTrack.scrollWidth / 2) x = 0;
--    requestAnimationFrame(step);
--  };
--  requestAnimationFrame(step);
-+function setupMobileNav() {
-+  const nav = $("#nav");
-+  $("#hamburger")?.addEventListener("click", () => {
-+    nav?.classList.toggle("is-open");
-+  });
+diff --git a/styles.css b/styles.css
+index 49d85dda3f4317c2411258aa06bbf0725be638c0..884ee79195d1c944bdb4c00a1a5e9bb093d8865d 100644
+--- a/styles.css
++++ b/styles.css
+@@ -1,410 +1,74 @@
+ :root{
+-  --bg:#0b0f14;
+-  --card:#0f1620;
+-  --soft:#0d141c;
+-  --line: rgba(255,255,255,.10);
+-  --text:#eef3ff;
+-  --muted:#a9b7cc;
+-  --accent:#4da3ff;
+-  --accent2:#68f0c7;
++  --bg:#f5f7fb;
++  --card:#ffffff;
++  --text:#1b2736;
++  --muted:#6a7a8d;
++  --line:#e4ebf4;
++  --primary:#2563eb;
++  --kakao:#fae100;
+   --radius:18px;
+-  --shadow: 0 18px 46px rgba(0,0,0,.35);
+-  --max: 1120px;
++  --shadow:0 14px 30px rgba(30,58,138,.08);
++  --max:1180px;
  }
--fillTicker();
- 
--// Mailto helper (서버 없이 전송)
--function toMailto(fd) {
--  const service = fd.get("service") || "";
--  const area = fd.get("area") || "";
--  const size = fd.get("size") || "";
--  const org = fd.get("org") || "";
--  const phone = fd.get("phone") || "";
--  const message = fd.get("message") || "";
-+function init() {
-+  $("#year").textContent = new Date().getFullYear();
-+  $("#heroImage").src = SITE_DATA.heroImage;
- 
--  const subject = `[홈페이지 견적] ${service} / ${area}`.trim();
--  const body = [
--    `서비스: ${service}`,
--    `지역: ${area}`,
--    size ? `규모: ${size}` : null,
--    org ? `이름/기관명: ${org}` : null,
--    `연락처: ${phone}`,
--    "",
--    message ? `상세내용:\n${message}` : ""
--  ].filter(Boolean).join("\n");
-+  renderStats();
-+  renderAbout();
- 
--  const to = "contact@daolworks.co.kr"; // ← 너 이메일로 바꿔줘
--  return `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+-
+ *{box-sizing:border-box}
+ html,body{margin:0;padding:0}
+ body{
+-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Apple SD Gothic Neo, "Noto Sans KR", Arial, "맑은 고딕", sans-serif;
+-  background:
+-    radial-gradient(900px 550px at 70% 0%, rgba(77,163,255,.25), transparent 60%),
+-    radial-gradient(900px 600px at 15% 20%, rgba(104,240,199,.14), transparent 62%),
+-    var(--bg);
+-  color:var(--text);
+-  line-height:1.5;
 -}
-+  renderServiceGrid("#airServices", SITE_DATA.services.air);
-+  renderServiceGrid("#cleaningServices", SITE_DATA.services.cleaning);
-+  renderServiceGrid("#airconServices", SITE_DATA.services.aircon);
+-a{color:inherit;text-decoration:none}
+-.container{max-width:var(--max); margin:0 auto; padding:0 18px}
+-.muted{color:var(--muted)}
+-.tiny{font-size:12px}
+-
+-.topbar{
+-  position:sticky; top:0; z-index:60;
+-  background: rgba(0,0,0,.30);
+-  backdrop-filter: blur(10px);
+-  border-bottom:1px solid var(--line);
+-}
+-.topbar__inner{
+-  display:flex; justify-content:space-between; align-items:center;
+-  padding:10px 0; gap:12px;
+-}
+-.topbar__left{display:flex; align-items:center; gap:10px}
+-.pill{
+-  display:inline-flex; padding:6px 10px; border-radius:999px;
+-  border:1px solid rgba(77,163,255,.45);
+-  background: rgba(77,163,255,.12);
+-  font-weight:900; font-size:12px;
+-}
+-.topbar__right{display:flex; gap:10px; align-items:center}
+-.topbar__cta{
+-  font-weight:900; font-size:13px; color:var(--text);
+-  padding:8px 10px; border-radius:12px;
+-  border:1px solid var(--line);
+-  background: rgba(255,255,255,.03);
+-}
+-.topbar__tel{
+-  font-weight:900;
+-  padding:8px 10px;
+-  border-radius:12px;
+-  border:1px solid rgba(104,240,199,.35);
+-  background: rgba(104,240,199,.10);
+-}
+-
+-.header{
+-  position:sticky; top:44px; z-index:55;
+-  background: rgba(11,15,20,.55);
+-  backdrop-filter: blur(10px);
+-  border-bottom:1px solid var(--line);
+-}
+-.header__inner{
+-  display:flex; justify-content:space-between; align-items:center;
+-  padding:14px 0; gap:12px;
+-}
+-.brand{display:flex; gap:12px; align-items:center}
+-.brand__logo{
+-  width:46px;height:46px;border-radius:16px;
+-  display:grid;place-items:center;
+-  background: linear-gradient(135deg, rgba(77,163,255,.26), rgba(104,240,199,.16));
+-  border:1px solid var(--line);
+-  box-shadow: var(--shadow);
+-  font-weight:1000;
+-}
+-.brand__text strong{display:block}
+-.brand__text span{display:block; font-size:12px; color:var(--muted); margin-top:2px}
+-
+-.nav{display:flex; gap:16px; align-items:center}
+-.nav a{color:var(--muted); font-weight:800; font-size:14px}
+-.nav a:hover{color:var(--text)}
+-
+-.hamburger{
+-  display:none;
+-  border:1px solid var(--line);
+-  background: rgba(255,255,255,.03);
+-  border-radius:14px;
+-  padding:10px;
+-}
+-.hamburger span{display:block; width:22px; height:2px; background:var(--text); margin:4px 0}
+-
+-.btn{
+-  display:inline-flex; align-items:center; justify-content:center;
+-  padding:12px 16px; border-radius:14px;
+-  border:1px solid rgba(77,163,255,.42);
+-  background: linear-gradient(135deg, rgba(77,163,255,.24), rgba(104,240,199,.14));
+-  box-shadow: var(--shadow);
+-  font-weight:1000;
+-}
+-.btn:hover{transform: translateY(-1px)}
+-.btn--ghost{
+-  background: rgba(255,255,255,.03);
+-  border:1px solid var(--line);
+-  box-shadow:none;
+-}
+-.btn--small{padding:10px 12px; border-radius:12px; font-size:13px}
+-.btn--block{width:100%}
+-
+-.ticker{
+-  border-bottom:1px solid var(--line);
+-  background: rgba(255,255,255,.02);
+-}
+-.ticker__inner{
+-  display:flex; align-items:center; gap:12px;
+-  padding:10px 0;
+-}
+-.ticker__label{
+-  flex:0 0 auto;
+-  font-weight:1000;
+-  font-size:13px;
+-  padding:6px 10px;
+-  border-radius:999px;
+-  border:1px solid var(--line);
+-  background: rgba(0,0,0,.18);
+-}
+-.ticker__track{
+-  overflow:hidden;
+-  white-space:nowrap;
+-  color:var(--muted);
+-  font-weight:800;
+-  font-size:13px;
+-}
+-.ticker__item{display:inline-block; margin-right:18px; opacity:.95}
+-
+-.hero{position:relative; padding:38px 0 20px}
+-.hero__grid{display:grid; grid-template-columns: 1.1fr .9fr; gap:16px; align-items:start}
+-.hero__kicker{color:var(--muted); font-weight:900; margin:0 0 8px}
+-.hero__title{font-size:44px; line-height:1.12; margin:0 0 12px; letter-spacing:-.7px}
+-.hero__desc{margin:0 0 16px; color:var(--muted); font-size:16px}
+-.hero__cta{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:16px}
+-.hero__badges{display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:10px}
+-.badgeCard{
+-  border:1px solid var(--line);
+-  background: rgba(255,255,255,.03);
+-  border-radius: var(--radius);
+-  padding:12px;
+-}
+-.badgeCard strong{display:block}
+-.badgeCard span{display:block; font-size:12px; margin-top:3px}
+-
+-.hero__bg{
+-  position:absolute; inset:auto 0 -40px 0;
+-  height:150px;
+-  background: linear-gradient(180deg, transparent, rgba(0,0,0,.30));
+-  pointer-events:none;
+-}
+-
+-.panel{
+-  border:1px solid var(--line);
+-  background: rgba(15,22,32,.70);
+-  border-radius: var(--radius);
+-  box-shadow: var(--shadow);
+-  padding:16px;
+-}
+-.panel__head h3{margin:0 0 6px}
+-.panel__head p{margin:0 0 10px}
+-
+-.form .field{margin:12px 0}
+-label{display:block; color:var(--muted); font-size:13px; margin-bottom:6px}
+-input,select,textarea{
+-  width:100%;
+-  padding:12px 12px;
+-  border-radius:14px;
+-  border:1px solid var(--line);
+-  background: rgba(0,0,0,.18);
+-  color:var(--text);
+-  outline:none;
+-}
+-input:focus,select:focus,textarea:focus{border-color: rgba(77,163,255,.70)}
+-
+-.panel__chips{display:flex; gap:10px; margin-top:12px; flex-wrap:wrap}
+-.chip{
+-  display:inline-flex; align-items:center; gap:8px;
+-  padding:10px 12px; border-radius:999px;
+-  border:1px solid var(--line);
+-  background: rgba(255,255,255,.03);
+-  font-weight:900; font-size:13px;
+-}
+-
+-.section{padding:46px 0}
+-.section--soft{background: linear-gradient(180deg, transparent, rgba(255,255,255,.02), transparent)}
+-.section__head{margin-bottom:16px}
+-.section__head h2{margin:0 0 8px; font-size:28px; letter-spacing:-.4px}
+-.section__head p{margin:0}
+-
+-.tabs{display:flex; gap:10px; flex-wrap:wrap; margin:12px 0 14px}
+-.tab{
+-  border:1px solid var(--line);
+-  background: rgba(255,255,255,.03);
++  font-family:"Noto Sans KR",Apple SD Gothic Neo,"맑은 고딕",system-ui,sans-serif;
++  background:var(--bg);
+   color:var(--text);
+-  padding:10px 12px;
+-  border-radius:999px;
+-  font-weight:1000;
+-  cursor:pointer;
+-}
+-.tab.is-active{
+-  border-color: rgba(77,163,255,.55);
+-  background: rgba(77,163,255,.12);
++  line-height:1.55;
+ }
+-.tabPanels{margin-top:6px}
+-.tabPanel{display:none}
+-.tabPanel.is-active{display:block}
++a{text-decoration:none;color:inherit}
++.container{max-width:var(--max);margin:0 auto;padding:0 20px}
  
--// Quick form submit
--$("#quickForm")?.addEventListener("submit", (e) => {
--  e.preventDefault();
--  const fd = new FormData(e.target);
--  // quickForm은 message가 없으니 기본값
--  fd.set("message", "빠른 견적 신청(메인 폼)에서 접수되었습니다. 세부 상담 요청드립니다.");
--  window.location.href = toMailto(fd);
--});
-+  renderPortfolio("#airBoardList", SITE_DATA.portfolio.air);
-+  renderPortfolio("#cleaningBoardList", SITE_DATA.portfolio.cleaning);
-+  renderPortfolio("#airconBoardList", SITE_DATA.portfolio.aircon);
-+
-+  setupTabs();
-+  setupMobileNav();
-+}
+-.cardGrid{
+-  display:grid;
+-  grid-template-columns: repeat(4, minmax(0,1fr));
+-  gap:12px;
+-}
+-.svcCard{
+-  border:1px solid var(--line);
+-  background: rgba(255,255,255,.03);
+-  border-radius: var(--radius);
+-  padding:16px;
+-}
+-.svcCard__icon{font-size:22px}
+-.svcCard h3{margin:10px 0 6px}
+-.svcCard p{margin:0 0 12px}
+-.svcCard__link{font-weight:1000; color:var(--text)}
+-.svcCard__link:hover{opacity:.85}
++.header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
++.header__inner{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 0}
++.logo{font-weight:900;font-size:24px;color:#0f172a}
  
--// Estimate form submit
--$("#estimateForm")?.addEventListener("submit", (e) => {
--  e.preventDefault();
--  const fd = new FormData(e.target);
--  window.location.href = toMailto(fd);
--});
-+init();
+-.section__cta{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
++.nav{display:flex;align-items:center;gap:20px}
++.nav a{font-weight:700;color:#334155;font-size:14px}
+ 
+-.whyGrid{
+-  display:grid;
+-  grid-template-columns: repeat(4, minmax(0,1fr));
+-  gap:12px;
+-}
+-.whyCard{
+-  border:1px solid var(--line);
+-  background: rgba(255,255,255,.03);
+-  border-radius: var(--radius);
+-  padding:16px;
+-}
+-.whyCard h3{margin:0 0 8px}
++.headerActions{display:flex;gap:8px}
++.hamburger{display:none;border:1px solid var(--line);background:#fff;border-radius:10px;padding:8px 10px;font-size:18px}
+ 
+-.highlight{
+-  margin-top:14px;
+-  border:1px solid rgba(104,240,199,.35);
+-  background: rgba(104,240,199,.08);
+-  border-radius: var(--radius);
+-  padding:16px;
+-  display:flex; align-items:center; justify-content:space-between; gap:12px;
+-}
++.btn{display:inline-flex;align-items:center;justify-content:center;padding:11px 15px;border-radius:12px;background:var(--primary);color:#fff;font-weight:700;border:1px solid transparent;transition:.2s}
++.btn:hover{transform:translateY(-1px)}
++.btn--kakao{background:var(--kakao);color:#111827}
+ 
+-.trustStrip{
+-  margin-top:14px;
+-  display:grid;
+-  grid-template-columns: repeat(3, minmax(0,1fr));
+-  gap:12px;
+-}
+-.trustItem{
+-  border:1px solid var(--line);
+-  background: rgba(255,255,255,.03);
+-  border-radius: var(--radius);
+-  padding:14px;
+-}
+-.trustItem strong{display:block}
+-.trustItem span{display:block; margin-top:4px; font-size:12px}
++.hero--large{position:relative;height:min(72vh,720px);min-height:420px;overflow:hidden}
++.hero--large img{width:100%;height:100%;object-fit:cover;display:block}
++.hero__overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(15,23,42,.72),rgba(15,23,42,.25),rgba(15,23,42,.05));display:flex;align-items:center}
++.hero__overlay h1{margin:0 0 10px;color:#fff;font-size:58px;letter-spacing:-1.2px}
++.hero__overlay p{margin:0;color:#dbeafe;font-size:18px;max-width:640px}
+ 
+-.process{
+-  display:grid;
+-  grid-template-columns: repeat(5, minmax(0,1fr));
+-  gap:10px;
+-}
+-.step{
+-  border:1px solid var(--line);
+-  background: rgba(255,255,255,.03);
+-  border-radius: var(--radius);
+-  padding:14px;
+-}
+-.step span{display:inline-block; font-weight:1000; color:var(--muted)}
+-.step strong{display:block; margin-top:6px}
+-.step em{display:block; margin-top:4px; font-style:normal; font-size:12px}
++.section{padding:64px 0}
++.section--soft{background:#f8fbff;border-top:1px solid #edf2f8;border-bottom:1px solid #edf2f8}
++h2{font-size:34px;margin:0 0 18px}
++.aboutCard{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow)}
++.aboutCard p{margin:0;color:#475569}
+ 
+-.rangeGrid{
+-  display:grid;
+-  grid-template-columns: repeat(3, minmax(0,1fr));
+-  gap:12px;
+-}
+-.rangeCard{
+-  border:1px solid var(--line);
+-  background: rgba(255,255,255,.03);
+-  border-radius: var(--radius);
+-  padding:16px;
+-}
+-.rangeCard h3{margin:0 0 10px}
+-.rangeCard ul{margin:0; padding-left:18px; color:var(--muted)}
+-.rangeCard li{margin:7px 0}
++.portfolioGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
++.portfolioCard{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}
++.portfolioCard img{width:100%;height:210px;object-fit:cover}
++.portfolioCard__body{padding:14px}
++.portfolioCard h3{margin:0 0 6px;font-size:18px}
++.portfolioCard p{margin:0;color:#64748b;font-size:14px}
+ 
+-.reviewGrid{
+-  display:grid;
+-  grid-template-columns: repeat(3, minmax(0,1fr));
+-  gap:12px;
+-}
+-.review{
+-  border:1px solid var(--line);
+-  background: rgba(255,255,255,.03);
+-  border-radius: var(--radius);
+-  padding:16px;
+-}
+-.stars{font-weight:1000; letter-spacing:1px}
+-.review p{margin:10px 0 10px; color:var(--text)}
+-
+-.estimate{
+-  display:grid;
+-  grid-template-columns: .9fr 1.1fr;
+-  gap:12px;
+-  align-items:start;
+-}
+-.infoBox{
+-  border:1px solid var(--line);
+-  background: rgba(255,255,255,.03);
+-  border-radius: var(--radius);
+-  padding:16px;
+-}
+-.infoBox h3{margin:0 0 10px}
+-.infoBox ul{margin:0; padding-left:18px; color:var(--muted)}
+-.infoBox li{margin:7px 0}
+-
+-.form--card{
+-  border:1px solid var(--line);
+-  background: rgba(15,22,32,.70);
+-  border-radius: var(--radius);
+-  box-shadow: var(--shadow);
+-  padding:16px;
+-}
+-.grid2{
+-  display:grid;
+-  grid-template-columns: 1fr 1fr;
+-  gap:12px;
+-}
+-
+-.floatCTA{
+-  position:fixed;
+-  right:16px;
+-  bottom:16px;
+-  display:flex;
+-  gap:10px;
+-  z-index:80;
+-}
+-.floatCTA__btn{
+-  padding:12px 14px;
+-  border-radius:999px;
+-  font-weight:1000;
+-  border:1px solid rgba(77,163,255,.45);
+-  background: linear-gradient(135deg, rgba(77,163,255,.22), rgba(104,240,199,.14));
+-  box-shadow: var(--shadow);
+-}
+-.floatCTA__btn--ghost{
+-  border:1px solid var(--line);
+-  background: rgba(255,255,255,.03);
+-}
+-
+-.footer{
+-  border-top:1px solid var(--line);
+-  background: rgba(0,0,0,.22);
+-  padding:18px 0;
+-}
+-.footer__inner{
+-  display:flex; justify-content:space-between; gap:12px; align-items:flex-start;
+-}
+-.footer__links{display:flex; gap:12px; flex-wrap:wrap; color:var(--muted); font-weight:900}
+-.footer__links a:hover{color:var(--text)}
++.footer{padding:26px 0;border-top:1px solid var(--line);background:#fff}
++.footer__inner{text-align:center;color:#64748b}
++.footer__inner p{margin:6px 0 0}
+ 
+-@media (max-width: 980px){
+-  .hero__grid{grid-template-columns:1fr}
+-  .hero__title{font-size:36px}
+-  .cardGrid{grid-template-columns: repeat(2, minmax(0,1fr))}
+-  .whyGrid{grid-template-columns: repeat(2, minmax(0,1fr))}
+-  .process{grid-template-columns: repeat(2, minmax(0,1fr))}
+-  .rangeGrid{grid-template-columns:1fr}
+-  .reviewGrid{grid-template-columns:1fr}
+-  .estimate{grid-template-columns:1fr}
++@media (max-width:980px){
++  .hero__overlay h1{font-size:44px}
++  .portfolioGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ }
+-@media (max-width: 760px){
+-  .nav{
+-    display:none;
+-    position:absolute;
+-    left:18px; right:18px;
+-    top:64px;
+-    background: rgba(11,15,20,.96);
+-    border:1px solid var(--line);
+-    border-radius: var(--radius);
+-    padding:12px;
+-    flex-direction:column;
+-    align-items:stretch;
+-  }
+-  .nav.is-open{display:flex}
+-  .nav a{padding:10px 10px; border-radius:12px}
+-  .nav a:hover{background: rgba(255,255,255,.03)}
++@media (max-width:840px){
+   .hamburger{display:block}
+-  .grid2{grid-template-columns:1fr}
+-  .hero__badges{grid-template-columns:1fr}
++  .headerActions{display:none}
++  .nav{display:none;position:absolute;top:66px;left:14px;right:14px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px;flex-direction:column;align-items:flex-start}
++  .nav.is-open{display:flex}
++  .hero--large{height:58vh;min-height:340px}
++  .hero__overlay h1{font-size:36px}
++  .hero__overlay p{font-size:15px}
++  .portfolioGrid{grid-template-columns:1fr}
+ }
  
 EOF
 )
