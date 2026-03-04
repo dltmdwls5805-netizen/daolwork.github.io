@@ -1,5 +1,5 @@
 const SITE_DATA = {
-  heroImage: "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=1400&q=80",
+  heroImage: "./images/hero.svg",
   stats: [
     { value: "4.9/5.0", label: "고객 만족도" },
     { value: "6,000+", label: "누적 시공 건수" },
@@ -32,19 +32,19 @@ const SITE_DATA = {
   },
   portfolio: {
     air: [
-      { image: "https://images.unsplash.com/photo-1581092787765-e3feb951d987?auto=format&fit=crop&w=1200&q=80", title: "학교 공기순환기 필터 교체", desc: "교실 24대 필터 교체 및 점검 완료" },
-      { image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1200&q=80", title: "사무실 공조 라인 점검", desc: "필터 규격 재설정 및 주기 관리 시작" },
-      { image: "https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=1200&q=80", title: "공공시설 환기장치 관리", desc: "분기별 유지보수 계약 현장" },
+      { image: "./images/air1.svg", title: "학교 공기순환기 필터 교체", desc: "교실 24대 필터 교체 및 점검 완료" },
+      { image: "./images/air2.svg", title: "사무실 공조 라인 점검", desc: "필터 규격 재설정 및 주기 관리 시작" },
+      { image: "./images/air3.svg", title: "공공시설 환기장치 관리", desc: "분기별 유지보수 계약 현장" },
     ],
     cleaning: [
-      { image: "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=1200&q=80", title: "신축 아파트 입주청소", desc: "34평 입주 전 오염 제거 및 마감" },
-      { image: "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=1200&q=80", title: "상가 오픈 전 청소", desc: "유리/바닥/집기 오염 제거" },
-      { image: "https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=1200&q=80", title: "특수 공간 정리 청소", desc: "폐기 분류 + 살균 + 악취 개선" },
+      { image: "./images/cleaning1.svg", title: "신축 아파트 입주청소", desc: "34평 입주 전 오염 제거 및 마감" },
+      { image: "./images/cleaning2.svg", title: "상가 오픈 전 청소", desc: "유리/바닥/집기 오염 제거" },
+      { image: "./images/cleaning3.svg", title: "특수 공간 정리 청소", desc: "폐기 분류 + 살균 + 악취 개선" },
     ],
     aircon: [
-      { image: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=1200&q=80", title: "시스템 에어컨 분해세척", desc: "사업장 천장형 에어컨 클리닝" },
-      { image: "https://images.unsplash.com/photo-1554995207-c18c203602cb?auto=format&fit=crop&w=1200&q=80", title: "가정용 벽걸이 에어컨", desc: "곰팡이 냄새 개선 시공" },
-      { image: "https://images.unsplash.com/photo-1565538810643-b5bdb714032a?auto=format&fit=crop&w=1200&q=80", title: "학원 다중 에어컨 관리", desc: "여름 시즌 사전 점검 및 세척" },
+      { image: "./images/aircon1.svg", title: "시스템 에어컨 분해세척", desc: "사업장 천장형 에어컨 클리닝" },
+      { image: "./images/aircon2.svg", title: "가정용 벽걸이 에어컨", desc: "곰팡이 냄새 개선 시공" },
+      { image: "./images/aircon3.svg", title: "학원 다중 에어컨 관리", desc: "여름 시즌 사전 점검 및 세척" },
     ],
   },
 };
